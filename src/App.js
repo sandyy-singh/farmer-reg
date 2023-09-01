@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+
+import SignUp from "./components/loginSignup/SignUp";
+import Login from "./components/loginSignup/Login";
+import EnterNumber from "./components/loginSignup/EnterNumber";
+// import RegisterAsFarmer from "./components/loginSignup/RegisterAsFarmer";
+import ResetPassword from "./components/loginSignup/ResetPassword";
+import EditForm from "./components/loginSignup/EditForm";
+import Contact from "./components/loginSignup/Contact";
+import EditByNumber from "./components/loginSignup/EditByNumber";
+import FarmerOnBoardinng from "./components/loginSignup/FarmerOnBoardinng";
+
+
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
+
+
 
 function App() {
+
+
+
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className=" app">
+      <BrowserRouter>
+       <Routes>
+        <Route path="/" element={<Login />}></Route>
+         <Route path="/login" element={<Login />}></Route>
+         <Route path="/signup" element={<SignUp />}></Route>
+         <Route path="/EnterNumber" element={<EnterNumber />}></Route>
+         <Route path="/ResetPassword" element={<ResetPassword />}></Route>
+        //  <Route path="/FarmerOnBoardinng" element={<FarmerOnBoardinng />}></Route>
+         <Route path="/EditForm" element={<EditForm />}></Route>
+         <Route path="/Contact" element={<Contact />}></Route>
+         <Route path="/EditByNumber" element={<EditByNumber />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
+   
   );
 }
 
-export default App;
+export default App 
+
+
+
+
+
+
+
+
+
+
+
