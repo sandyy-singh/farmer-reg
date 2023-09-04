@@ -1,488 +1,338 @@
-import React from 'react'
-import "./RegisterAsFarmer.scss";
+import React from "react";
+import { useState } from "react";
 import Navbar from "./Navbar";
-
-
-import { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-// import {useEffect } from "react";
+import "./FarmerOnBoardinng.scss";
+import { useUserContext } from "./UserProvider";
 import axios from "axios";
 
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { apppp } from "./firebase";
+
+const firestore = getFirestore(apppp);
+
 const EditForm = () => {
+    const [farmerName, setFarmerName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [landHolding, setLandHolding] = useState("");
+    const [thisSeason, setThisSeason] = useState("");
+    const [previousSeason, setPreviousSeason] = useState("");
+    const [aadharPanCard, setAadharPanCard] = useState("");
 
+    const [isCropBeforeSowing, setIsCropBeforeSowing] = useState(false);
+    const [isCoverCropping, setIsCoverCropping] = useState(false);
+    const [isIntercropping, setIsIntercropping] = useState(false);
+    const [isBioFertilizers, setIsBioFertilizers] = useState(false);
+    const [isAgroforestry, setIsAgroforestry] = useState(false);
 
-    const navigate =useNavigate()
+    const { userId } = useUserContext();
 
-    useEffect(()=>{
-  
-      if(!localStorage.getItem('token')){
-  
-        navigate('/login')
-      
-      }
-  
-  
-  
-    },[])
-  
-  
-    // form states
-    const [fpoName, setFpoName] = useState("");
-    const [name, setName] = useState("");
-    const [PhoneNo, setPhoneNo] = useState("");
-    const [State, setState] = useState("");
-  
-    const [district, setDistrict] = useState("");
-    const [village, setVillage] = useState("");
-    const [LandArea, setLandArea] = useState("");
-    const [cropsSowing, setCropsSowing] = useState("");
-  
-    const [coverCrops, setCoverCrops] = useState("");
-    const [intercrops, setIntercrops] = useState("");
-    const [location, setLocation] = useState("");
-    const [objective, setObjective] = useState("");
-  
-    const [nitrogenFixing, setNitrogenFixing] = useState("");
-    const [villagePractices, setVillagePractices] = useState("");
-  
-    const [agroforestry, setAgroforestry] = useState(false);
-  
-    const [agroforestryArea, setAgroforestryArea] = useState("");
-    const [agroforestrySystem, setAgroforestrySystem] = useState("");
-    const [treesAndSpecies, setTreesAndSpecies] = useState("");
-  
-    // retrived data state
-    // const [data, setData] = useState([]);
-  
-    // submit event
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-  
-      
-  
-      // our object to pass
-      const data = {
-        fpoName,
-        name,
-        PhoneNo,
-        State,
-        district,
-        village,
-        LandArea,
-        cropsSowing,
-        coverCrops,
-        intercrops,
-        location,
-        objective,
-        nitrogenFixing,
-        villagePractices,
-        agroforestryArea,
-        agroforestrySystem,
-        treesAndSpecies,
-      };
-      axios
-        .post(
-          "https://dcdataapp-default-rtdb.firebaseio.com/farmerReg.json",
-     
-          // "https://sheetdb.io/api/v1/jzh5le0t0227h",
-          data
-        )
-        .then((response) => {
-          console.log(response);
-          console.log(
-            fpoName,
-            name,
-            PhoneNo,
-            State,
-            district,
-            village,
-            LandArea,
-            cropsSowing,
-            coverCrops,
-            intercrops,
-            location,
-            objective,
-            nitrogenFixing,
-            villagePractices,
-            agroforestryArea,
-            agroforestrySystem,
-            treesAndSpecies
-          );
-          setFpoName("");
-          setName("");
-          setPhoneNo("");
-          setState("");
-  
-          setDistrict("");
-          setVillage("");
-          setLandArea("");
-          setCropsSowing("");
-  
-          setCoverCrops("");
-          setIntercrops("");
-          setLocation("");
-          setObjective("");
-  
-          setNitrogenFixing("");
-          setVillagePractices("");
-  
-          setAgroforestryArea("");
-          setAgroforestrySystem("");
-          setTreesAndSpecies("");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-  
-  
-        
+    const FarmerOnBoardinngSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await addDoc(
+                collection(firestore, `FarmerOnBoardinng/${userId}/Farmer_reg`),
+                {
+                    farmerName,
+                    address,
+                    phoneNumber,
+                    landHolding,
+                    thisSeason,
+                    previousSeason,
+                    aadharPanCard,
+                    isCropBeforeSowing,
+                    isCoverCropping,
+                    isIntercropping,
+                    isBioFertilizers,
+                    isAgroforestry,
+                }
+            ).then((response) => alert("form submitted"));
+        } catch (error) {
+            console.error(error.message);
+            alert("something wrong, try again")
+            setFarmerName("");
+            setAddress("");
+            setPhoneNumber("");
+            setLandHolding("");
+            setThisSeason("");
+            setPreviousSeason("");
+            setAadharPanCard("");
+            setIsCropBeforeSowing("");
+            setIsCoverCropping("");
+            setIsIntercropping("");
+            setIsBioFertilizers("");
+            setIsAgroforestry("");
+            return;
+        }
+        setFarmerName("");
+        setAddress("");
+        setPhoneNumber("");
+        setLandHolding("");
+        setThisSeason("");
+        setPreviousSeason("");
+        setAadharPanCard("");
+        setIsCropBeforeSowing("");
+        setIsCoverCropping("");
+        setIsIntercropping("");
+        setIsBioFertilizers("");
+        setIsAgroforestry("");
+
+        const data = {
+            farmerName,
+            address,
+            phoneNumber,
+            landHolding,
+            thisSeason,
+            previousSeason,
+            aadharPanCard,
+            isCropBeforeSowing,
+            isCoverCropping,
+            isIntercropping,
+            isBioFertilizers,
+            isAgroforestry,
+        };
+
+        axios
+            .post(
+                "https://dcdataapp-default-rtdb.firebaseio.com/farmerReg.json",
+                data
+            )
+            .then((response) => {
+                console.log(response);
+                console.log();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
-  
-    // getting data function
-    // const getData = () => {
-    //   axios
-    //     // .get("https://sheet.best/api/sheets/0fdf7336-2b26-4d1d-8bc6-5f81e71efb02")
-    //     .get("https://sheetdb.io/api/v1/jzh5le0t0227h")
-  
-    //     .then((response) => {
-    //       setData(response.data);
-    //     });
-    // };
-  
-    // // triggering function
-    // useEffect(() => {
-    //   getData();
-    // }, [data]);
 
+    return (
+        <div>
+            <Navbar />
+            <div className="container-fluid FarmerOnBoardinng  ">
+                <div className=" row  d-flex justify-content-center align-items-center FarmerOnBoardinng-box ">
+                    <div className="col-12   ">
+                        <h4 className="text-center ">Farmers On Boardinng</h4>
+                        <form
+                            autoComplete="off"
+                            className="form-group"
+                            onSubmit={FarmerOnBoardinngSubmit}
+                        >
+                            <div className="row ">
+                                <div className="col-10 offset-1">
+                                    <label className="labels-1" htmlFor="farmerName">
+                                        Farmer Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-inputs "
+                                        id="farmerName"
+                                        placeholder="Enter your farmer Name"
+                                        value={farmerName}
+                                        onChange={(e) => setFarmerName(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
 
+                            <div className="row ">
+                                <div className="col-10 offset-1">
+                                    <label className="labels-1" htmlFor="address">
+                                        Address
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-inputs"
+                                        id="address"
+                                        placeholder="Enter your address"
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-  return (
-    <div className=" register ">
-    <Navbar />
-      <div className="row justify-content-center align-items-center ">
-        <div className="col-10">
-          <form
-            autoComplete="off"
-            className="form-group"
-            onSubmit={handleSubmit}
-          >
-            <div className="row">
-              <div className="col">
-                <h6 className="Welcome">Welcome to Carbon Credit Program</h6>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <h5 className="head"> Register as Farmer</h5>
-              </div>
-            </div>
+                            <div className="row ">
+                                <div className="col-10 offset-1">
+                                    <label className="labels-1" htmlFor="phoneNumber">
+                                        phone Number
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-inputs"
+                                        id="phoneNumber"
+                                        placeholder="Enter your Phone Number"
+                                        value={phoneNumber}
+                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-            <div className="row rowww">
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom01">FPO Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom01"
-                  placeholder="Enter your FPO name"
-                  value={fpoName}
-                  onChange={(e) => setFpoName(e.target.value)}
-                  required
-                />
-              </div>
+                            <div className="row ">
+                                <div className="col-10 offset-1">
+                                    <label className="labels-1" htmlFor="landHolding">
+                                        Total Land Holding(in Acres )
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-inputs"
+                                        id="landHolding"
+                                        placeholder="Enter your land Holding"
+                                        value={landHolding}
+                                        onChange={(e) => setLandHolding(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="row ">
+                                <div className="col-10 offset-1">
+                                    <label className="labels-1" htmlFor="thisSeason">
+                                        Crop Sowing this season
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-inputs"
+                                        id="thisSeason"
+                                        placeholder="Enter Crop Sowing this season"
+                                        value={thisSeason}
+                                        onChange={(e) => setThisSeason(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="row ">
+                                <div className="col-10 offset-1">
+                                    <label className="labels-1 " htmlFor="previousSeason">
+                                        Crop Sowing previous season
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-inputs"
+                                        id="previousSeason"
+                                        placeholder="Enter Crop Sowing previous season"
+                                        value={previousSeason}
+                                        onChange={(e) => setPreviousSeason(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom02">Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom02"
-                  placeholder="Enter your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
+                            <div className="row ">
+                                <div className="col-10 offset-1">
+                                    <label className="labels-1" htmlFor="aadharPanCard">
+                                        Aadhar/Pan Card Number
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-inputs"
+                                        id="aadharPanCard"
+                                        placeholder="Enter your Phone No."
+                                        value={aadharPanCard}
+                                        onChange={(e) => setAadharPanCard(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom03">Phone Number</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="validationCustom03"
-                  placeholder="Enter your Phone Number"
-                  value={PhoneNo}
-                  onChange={(e) => setPhoneNo(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
+                            <div className="row ">
+                                <div className="col-10 offset-1">
+                                    <div>
+                                        <span>Farming Practices</span>
+                                    </div>
+                                    <div className="form-check">
+                                        <input
+                                            className="form-check-input form-input1"
+                                            type="checkbox"
+                                            value={isCropBeforeSowing}
+                                            id="flexCheckDefault1"
+                                            onChange={(e) => setIsCropBeforeSowing(true)}
+                                        />
+                                        <label
+                                            className="form-check-label labels-1"
+                                            htmlFor="flexCheckDefault1"
+                                        >
+                                            N<sub>2</sub>(Nitrogen) Fixation crop before sowing of any
+                                            crop
+                                        </label>
+                                    </div>
+                                    <div className="form-check">
+                                        <input
+                                            className="form-check-input form-input1"
+                                            type="checkbox"
+                                            value={isCoverCropping}
+                                            id="flexCheckChecked2"
+                                            onChange={(e) => setIsCoverCropping(true)}
+                                        />
+                                        <label
+                                            className="form-check-label labels-1"
+                                            htmlFor="flexCheckChecked2"
+                                        >
+                                            Cover-cropping
+                                        </label>
+                                    </div>
+                                    <div className="form-check">
+                                        <input
+                                            className="form-check-input form-input1"
+                                            type="checkbox"
+                                            value={isIntercropping}
+                                            id="flexCheckDefault3"
+                                            onChange={(e) => setIsIntercropping(true)}
+                                        />
+                                        <label
+                                            className="form-check-label labels-1"
+                                            htmlFor="flexCheckDefault3"
+                                        >
+                                            Intercropping
+                                        </label>
+                                    </div>
+                                    <div className="form-check">
+                                        <input
+                                            className="form-check-input form-labels-1"
+                                            type="checkbox"
+                                            value={isBioFertilizers}
+                                            id="flexCheckDefault4"
+                                            onChange={(e) => setIsBioFertilizers(true)}
+                                        />
+                                        <label
+                                            className="form-check-label labels-1"
+                                            htmlFor="flexCheckDefault4"
+                                        >
+                                            Use of Vermi-compost and other bio-fertilizers
+                                        </label>
+                                    </div>
+                                    <div className="form-check">
+                                        <input
+                                            className="form-check-input form-input1"
+                                            type="checkbox"
+                                            value={isAgroforestry}
+                                            id="flexCheckDefault5"
+                                            onChange={(e) => setIsAgroforestry(true)}
+                                        />
+                                        <label
+                                            className="form-check-label labels-1"
+                                            htmlFor="flexCheckDefault5"
+                                        >
+                                            Agroforestry (planting in the fields while cropping
+                                            farming)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div className="row rowww">
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom04">State</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom04"
-                  placeholder="Enter your State"
-                  value={State}
-                  onChange={(e) => setState(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="col-md-4  mb-3">
-                <label htmlFor="validationCustom05">District</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom05"
-                  placeholder="Enter your District"
-                  value={district}
-                  onChange={(e) => setDistrict(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="col-md-4 mb-3">
-                <label htmlFor="validationCustom06">Village</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom06"
-                  placeholder="Enter your Village"
-                  value={village}
-                  onChange={(e) => setVillage(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="row rowww">
-              <div className="col-md-4 mb-3">
-                <label htmlFor="validationCustom07">Total Land Area</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom07"
-                  placeholder="Enter your toal Land Area"
-                  value={LandArea}
-                  onChange={(e) => setLandArea(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="col-md-4 mb-3">
-                <label htmlFor="validationCustom08">
-                  Crops sowing (Current)
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom08"
-                  placeholder="Enter Crops sowing"
-                  value={cropsSowing}
-                  onChange={(e) => setCropsSowing(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom09">Cover Crops (if any)</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom09"
-                  placeholder=" Enter Cover Crops "
-                  value={coverCrops}
-                  onChange={(e) => setCoverCrops(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-            <div className="row rowww">
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom010">Intercrops (if any)</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom010"
-                  placeholder="Enter Intercrops"
-                  value={intercrops}
-                  onChange={(e) => setIntercrops(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="col-md-4 mb-3">
-                <label htmlFor="validationCustom011">
-                  Geographic Co-ordinates of the Project Location
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom011"
-                  placeholder="Enter Location "
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="col-md-4  mb-3">
-                <label htmlFor="validationCustom012">
-                  Objective of the farming project
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom012"
-                  placeholder="Enter objective of the farming project"
-                  value={objective}
-                  onChange={(e) => setObjective(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="row lastt rowww">
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom013">
-                  Does the Area of farming have cropped/planted with
-                  nitrogen-fixing species
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom013"
-                  placeholder="Does the Area of farming have cropped/planted"
-                  value={nitrogenFixing}
-                  onChange={(e) => setNitrogenFixing(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom014">
-                  Does the farming have improved Village Practices
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationCustom014"
-                  placeholder="Does the farming have improved Village Practices"
-                  value={villagePractices}
-                  onChange={(e) => setVillagePractices(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="col-md-4   mb-3">
-                <label htmlFor="validationCustom015">
-                  Does the area (farming)have agroforestry
-                </label>
-                <div id="farming-area">
-                  <div>
-                    Yes
-                    <input
-                      className="radio"
-                      type="radio"
-                      name="farming-area"
-                      value="Yes"
-                      onClick={() => setAgroforestry(true)}
-                      required
-                    />
-                  </div>
-                  <div>
-                    NO
-                    <input
-                      className="radio"
-                      type="radio"
-                      name="farming-area"
-                      value="NO"
-                      onClick={() => setAgroforestry(false)}
-                    />
-                  </div>
+                            <div className="row mt-2   ">
+                                <div className="col-8 offset-2  submitOnBoardinng  ">
+                                    <button type="submit" className="btn-FarmerOnBoardinng ">
+                                        Edit & Save
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </div>
             </div>
-            {!agroforestry && (
-              <div className="row ">
-                <div className="btnn  ">
-                  <button type="submit" className="btnn-1">
-                  Edit & Save
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {agroforestry && (
-              <div className="popup">
-                <div className="row rowww">
-                  <div className="col-md-4   mb-3">
-                    <label htmlFor="validationCustom015">
-                      Area of Agroforestry (acres)
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="validationCustom015"
-                      placeholder="Enter Area of Agroforestry"
-                      value={agroforestryArea}
-                      onChange={(e) => setAgroforestryArea(e.target.value)}
-                      required
-                    />
-                  </div>
-
-                  <div className="col-md-4   mb-1">
-                    <label htmlFor="validationCustom016">
-                      Types of Agroforestry System
-                    </label>
-                    <select
-                      className="form-select form-select mb-3"
-                      aria-label=".form-select-lg example"
-                      onChange={(e) => setAgroforestrySystem(e.target.value)}
-                    >
-                      <option selected>---: Open this select menu :---</option>
-                      <option value="silvopasture">silvopasture</option>
-                      <option value="Alley cropping">Alley cropping</option>
-                      <option value="forest farming">forest farming</option>
-                    </select>
-                  </div>
-
-                  <div className="col-md-4   mb-3">
-                    <label htmlFor="validationCustom017">
-                      Number of trees and species (Used in acres)
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="validationCustom017"
-                      placeholder=" Enter Number of trees and species "
-                      value={treesAndSpecies}
-                      onChange={(e) => setTreesAndSpecies(e.target.value)}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="row ">
-                  <div className="btnn  ">
-                    <button type="submit" className="btnn-1 mb-5" onSubmit={handleSubmit}>
-                      Edit & Save
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </form>
-
         </div>
-      </div>
-    </div>
-  )
-}  
+    );
+};
 
-export default EditForm
+export default EditForm;

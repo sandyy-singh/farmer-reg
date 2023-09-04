@@ -6,7 +6,7 @@
 }
 
 @mixin mob {
-    @media (max-width:450px) {
+    @media (max-width:460px) {
         @content;
     }
 }
@@ -72,16 +72,17 @@ label {
     >button {
         width: 140px;
         height: 45px;
-        padding: 8px;
+        padding: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
+        border-radius: 5px;
 
         @include mob {
-            width: 90px;
-            height: 35px;
-            padding: 8px;
+            width: 120px;
+            height: 40px;
+            padding: 12px;
         }
 
         background-color: rgb(22, 117, 62);
@@ -144,3 +145,41 @@ p {
 
     }
 }
+/* Add appropriate styling for your popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-content {
+    background-color: rgb(92, 174, 83);
+    border-radius: 10px;
+    padding: 60px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: #f5f3f3;
+  }
+  
+  /* Style for the close button */
+  .popup button {
+    background-color: transparent;
+    color: #fbfcfd;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 90px;
+    height: 35px;
+    background-color: rgb(155, 151, 143);
+    border-radius: 15px;
+    border: none;
+    outline: none;
+  }

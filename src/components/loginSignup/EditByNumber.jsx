@@ -18,7 +18,7 @@ const EditByNumber = () => {
           <div className="col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-4 offset-lg-4  EnterNumberbox p-4">
             <h4 className="text-center mt-2">
         
-              Enter your FPO Name and Number
+              Enter your Farmer Name and Number
             </h4>
             <form
               autoComplete="off"
@@ -27,7 +27,7 @@ const EditByNumber = () => {
             >
               <div className="row">
                 <div className="col-8 offset-2 mt-5">
-                  <label htmlFor="FPOname">Enter your FPO Name:</label>
+                  <label htmlFor="FPOname">Enter Farmer Name:</label>
                   <input
                     type="text"
                     className="form-control mt-3"
@@ -38,7 +38,7 @@ const EditByNumber = () => {
                 </div>
 
                 <div className="col-8 offset-2 mt-2">
-                  <label htmlFor="PhoneNumber">Enter your number:</label>
+                  <label htmlFor="PhoneNumber">Enter Farmer number:</label>
                   <input
                     type="number"
                     className="form-control mt-3"

@@ -17,10 +17,10 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
+  // const [user, setUser] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
 
-
-
-// eye button function
+  // eye button function
   const [passwordType, setPasswordType] = useState("password");
   const togglePassword = () => {
     if (passwordType === "password") {
@@ -30,24 +30,22 @@ const Login = () => {
     setPasswordType("password");
   };
 
-//email validation
+  //email validation
 
-const handleEmailChange = (e) => {
-  const inputEmail = e.target.value;
-  setEmail(inputEmail);
+  const handleEmailChange = (e) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
 
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  setIsValidEmail(emailPattern.test(inputEmail));
-};
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    setIsValidEmail(emailPattern.test(inputEmail));
+  };
 
-
-
-// submit login form
+  // submit login form
 
   const submitForm = (e) => {
     e.preventDefault();
-    if(!isValidEmail){
-      alert("Please enter a valid email address")
+    if (!isValidEmail) {
+      alert("Please enter a valid email address");
       setEmail("");
       setPassword("");
       return;
@@ -65,15 +63,23 @@ const handleEmailChange = (e) => {
       .then((response) => {
         setUserId(response);
         console.log(response);
-        alert("Welcome to CarbonFarming Family");
-        navigate("/FarmerOnBoardinng");
+        setShowAlert(true);
+        // alert("Welcome to CarbonFarming Family");
+      })
+      .then(() => {
+
+        setTimeout(() => {
+          navigate("/FarmerOnBoardinng")
+        }, 2000); // Hide the alert after 3 seconds (3000 milliseconds)
+      
+        //;
       })
 
       .catch((err) => {
         console.log(error);
-        alert("something wrong, please try again.")
+        alert("something wrong, please try again.");
         setError(err.message);
-        
+
         console.log(err);
       });
     setEmail("");
@@ -103,6 +109,15 @@ const handleEmailChange = (e) => {
   };
   return (
     <div className="container-fluid loginBg ">
+      {showAlert && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>LogIn successfull </h2>
+            <p>Welcome to CarbonFarming Family</p>
+            <button onClick={() => setShowAlert(false)}>Close</button>
+          </div>
+        </div>
+      )}
       <div className=" row  d-flex justify-content-center align-items-center mt-5 mt-sm-5 ">
         <div className="col-11  col-sm-8 col-md-6 col-lg-4 loginBox p-2 mt-5 mt-sm-5 ">
           <div className="logo  ">
@@ -114,7 +129,7 @@ const handleEmailChange = (e) => {
             className="form-group p-3"
             onSubmit={submitForm}
           >
-            <div className="row ">
+            <div className="row mb-3 mb--sm-0">
               <div className="col-10 offset-1 mb-sm-2">
                 <label htmlFor="email"> Email</label>
                 <input
@@ -127,7 +142,7 @@ const handleEmailChange = (e) => {
                 />
               </div>
             </div>
-            <div className="row ">
+            <div className="row mb-2 mb--sm-0 ">
               <div className="col-10 offset-1 mb-sm-2">
                 <label htmlFor="password">Password</label>
                 <div className="input-group ">
@@ -155,14 +170,13 @@ const handleEmailChange = (e) => {
               </div>
             </div>
 
-            {error && <p style={{color: 'red' }}>{error}</p>}
+          
 
             <div className="row">
               <div className="col-6 offset-1 mb-sm-2 ">
                 <input className="logincheckbox" type="checkbox" />
                 &nbsp;
                 <label className="check" htmlFor="vehicle2">
-                 
                   Remember Me
                 </label>
               </div>
@@ -173,7 +187,7 @@ const handleEmailChange = (e) => {
               </div>
             </div>
 
-            <div className="row mt-2 ">
+            <div className="row mt-2 pt-3 pt-sm-0  mb-2 mb--sm-0">
               <div className="col-10 offset-1 mb-sm-2 loginSubmit  ">
                 <button type="submit" className="btn-primary ">
                   LogIn

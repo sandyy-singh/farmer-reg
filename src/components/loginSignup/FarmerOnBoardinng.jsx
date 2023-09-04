@@ -1,16 +1,36 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Navbar from "./Navbar";
 import "./FarmerOnBoardinng.scss";
 import { useUserContext } from "./UserProvider";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { apppp } from "./firebase";
 
 const firestore = getFirestore(apppp);
+const auth = getAuth(apppp);
 
 const FarmerOnBoardinng = () => {
+    const [userName, setUuserName] = useState();
+    const { userId } = useUserContext();
+
+    
+    useEffect(() => {
+        if (!localStorage.getItem("token")) {
+          navigate("/login");
+        }
+        
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const email = user;
+          setUuserName(email.auth.currentUser.email);
+        }
+      });
+      }, []);
+
     const [farmerName, setFarmerName] = useState("");
     const [address, setAddress] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -25,7 +45,10 @@ const FarmerOnBoardinng = () => {
     const [isBioFertilizers, setIsBioFertilizers] = useState(false);
     const [isAgroforestry, setIsAgroforestry] = useState(false);
 
-    const { userId } = useUserContext();
+    const navigate = useNavigate();
+ 
+
+
 
     const FarmerOnBoardinngSubmit = async (e) => {
         e.preventDefault();
@@ -108,10 +131,10 @@ const FarmerOnBoardinng = () => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar  name={userName} />
             <div className="container-fluid FarmerOnBoardinng  ">
-                <div className=" row  d-flex justify-content-center align-items-center  ">
-                    <div className="col-8  col-sm-8 col-md-4  signUpBox mt-3 mt-sm-5  ">
+                <div className=" row  d-flex justify-content-center align-items-center FarmerOnBoardinng-box ">
+                    <div className="col-12   ">
                         <h4 className="text-center ">Farmers On Boardinng</h4>
                         <form
                             autoComplete="off"
@@ -120,12 +143,12 @@ const FarmerOnBoardinng = () => {
                         >
                             <div className="row ">
                                 <div className="col-10 offset-1">
-                                    <label className="labels" htmlFor="farmerName">
+                                    <label className="labels-1" htmlFor="farmerName">
                                         Farmer Name
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control form-input "
+                                        className="form-control form-inputs "
                                         id="farmerName"
                                         placeholder="Enter your farmer Name"
                                         value={farmerName}
@@ -137,12 +160,12 @@ const FarmerOnBoardinng = () => {
 
                             <div className="row ">
                                 <div className="col-10 offset-1">
-                                    <label className="labels" htmlFor="address">
+                                    <label className="labels-1" htmlFor="address">
                                         Address
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control form-input"
+                                        className="form-control form-inputs"
                                         id="address"
                                         placeholder="Enter your address"
                                         value={address}
@@ -154,12 +177,12 @@ const FarmerOnBoardinng = () => {
 
                             <div className="row ">
                                 <div className="col-10 offset-1">
-                                    <label className="labels" htmlFor="phoneNumber">
+                                    <label className="labels-1" htmlFor="phoneNumber">
                                         phone Number
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control form-input"
+                                        className="form-control form-inputs"
                                         id="phoneNumber"
                                         placeholder="Enter your Phone Number"
                                         value={phoneNumber}
@@ -171,12 +194,12 @@ const FarmerOnBoardinng = () => {
 
                             <div className="row ">
                                 <div className="col-10 offset-1">
-                                    <label className="labels" htmlFor="landHolding">
+                                    <label className="labels-1" htmlFor="landHolding">
                                         Total Land Holding(in Acres )
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control form-input"
+                                        className="form-control form-inputs"
                                         id="landHolding"
                                         placeholder="Enter your land Holding"
                                         value={landHolding}
@@ -187,12 +210,12 @@ const FarmerOnBoardinng = () => {
                             </div>
                             <div className="row ">
                                 <div className="col-10 offset-1">
-                                    <label className="labels" htmlFor="thisSeason">
+                                    <label className="labels-1" htmlFor="thisSeason">
                                         Crop Sowing this season
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control form-input"
+                                        className="form-control form-inputs"
                                         id="thisSeason"
                                         placeholder="Enter Crop Sowing this season"
                                         value={thisSeason}
@@ -203,12 +226,12 @@ const FarmerOnBoardinng = () => {
                             </div>
                             <div className="row ">
                                 <div className="col-10 offset-1">
-                                    <label className="labels " htmlFor="previousSeason">
+                                    <label className="labels-1 " htmlFor="previousSeason">
                                         Crop Sowing previous season
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control form-input"
+                                        className="form-control form-inputs"
                                         id="previousSeason"
                                         placeholder="Enter Crop Sowing previous season"
                                         value={previousSeason}
@@ -220,12 +243,12 @@ const FarmerOnBoardinng = () => {
 
                             <div className="row ">
                                 <div className="col-10 offset-1">
-                                    <label className="labels" htmlFor="aadharPanCard">
+                                    <label className="labels-1" htmlFor="aadharPanCard">
                                         Aadhar/Pan Card Number
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control form-input"
+                                        className="form-control form-inputs"
                                         id="aadharPanCard"
                                         placeholder="Enter your Phone No."
                                         value={aadharPanCard}
@@ -249,7 +272,7 @@ const FarmerOnBoardinng = () => {
                                             onChange={(e) => setIsCropBeforeSowing(true)}
                                         />
                                         <label
-                                            className="form-check-label labels"
+                                            className="form-check-label labels-1"
                                             htmlFor="flexCheckDefault1"
                                         >
                                             N<sub>2</sub>(Nitrogen) Fixation crop before sowing of any
@@ -265,7 +288,7 @@ const FarmerOnBoardinng = () => {
                                             onChange={(e) => setIsCoverCropping(true)}
                                         />
                                         <label
-                                            className="form-check-label labels"
+                                            className="form-check-label labels-1"
                                             htmlFor="flexCheckChecked2"
                                         >
                                             Cover-cropping
@@ -280,7 +303,7 @@ const FarmerOnBoardinng = () => {
                                             onChange={(e) => setIsIntercropping(true)}
                                         />
                                         <label
-                                            className="form-check-label labels"
+                                            className="form-check-label labels-1"
                                             htmlFor="flexCheckDefault3"
                                         >
                                             Intercropping
@@ -288,14 +311,14 @@ const FarmerOnBoardinng = () => {
                                     </div>
                                     <div className="form-check">
                                         <input
-                                            className="form-check-input form-input1"
+                                            className="form-check-input form-labels-1"
                                             type="checkbox"
                                             value={isBioFertilizers}
                                             id="flexCheckDefault4"
                                             onChange={(e) => setIsBioFertilizers(true)}
                                         />
                                         <label
-                                            className="form-check-label labels"
+                                            className="form-check-label labels-1"
                                             htmlFor="flexCheckDefault4"
                                         >
                                             Use of Vermi-compost and other bio-fertilizers
@@ -310,7 +333,7 @@ const FarmerOnBoardinng = () => {
                                             onChange={(e) => setIsAgroforestry(true)}
                                         />
                                         <label
-                                            className="form-check-label labels"
+                                            className="form-check-label labels-1"
                                             htmlFor="flexCheckDefault5"
                                         >
                                             Agroforestry (planting in the fields while cropping

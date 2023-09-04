@@ -6,7 +6,10 @@
   color: white;
   background-color: rgb(22, 117, 62);
   border: none;
-  position: sticky;
+
+
+
+
 
 
   &:hover {
@@ -27,7 +30,7 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 8px;
+  justify-content: space-between;
   margin-top: 10px;
 
 }
@@ -55,6 +58,7 @@
 .nav-links li a:hover {
   color: #a8afa9;
   text-decoration: underline;
+
 }
 .userPopup{
   position: absolute;
@@ -91,21 +95,35 @@
 }
 
 @media screen and (max-width:600px) {
+  .logoText{
+    display: flex;
+    justify-content: space-between;
+  }
 
   .logoText {
+    
     display: none;
 
   }
+  .nav-links {
+gap: 23px;
+  }
+
+
+  
 
 
 }
-@media screen and (max-width:273px) {
+@media screen and (max-width:365px) {
 
 
   .nav-links li a {
 
-    font-size: 12px;
+    font-size: 15px;
   }
+  .nav-links {
+    gap: 10px;
+      }
 
 
 }
