@@ -1,3 +1,5 @@
+
+
 .navbar {
   display: flex;
   width: auto;
@@ -75,12 +77,15 @@
   flex-direction: column;
   >p{
     font-weight: bold;
+    color: #13ec54;
+    font-size: 14px;
   }
   .logout{
    height: 30px;
    width: 95px;
    font-size: 15px;
-    background-color: rgb(156, 152, 152);
+    background-color: rgb(233, 89, 89);
+    color: antiquewhite;
     padding: 2px;
     border: none;
     border-radius: 10px;
@@ -88,7 +93,7 @@
     position: relative;
     bottom: 10px;
     &:hover{
-      background-color: rgb(113, 108, 108);
+      background-color: rgb(241, 42, 42);
     }
   }
 

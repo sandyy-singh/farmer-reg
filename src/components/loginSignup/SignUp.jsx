@@ -47,7 +47,6 @@ const SignUp = () => {
 
     if (!isValidMobile) {
       alert("Please enter a valid 10-digit mobile number");
-;
       setPhone("");
 
       return;
@@ -59,7 +58,6 @@ const SignUp = () => {
 
       return;
     }
-
 
     try {
       await createUserWithEmailAndPassword(
@@ -81,7 +79,7 @@ const SignUp = () => {
       }).then((response) => alert("your account is created"));
     } catch (error) {
       if (error) {
-        console.log(error)
+        console.log(error);
         alert("email is already registered");
         setName("");
         setLocation("");
@@ -130,15 +128,15 @@ const SignUp = () => {
   return (
     <div className="container-fluid register1 ">
       <div className=" row  d-flex justify-content-center align-items-center  ">
-        <div className="col-8  col-sm-8 col-md-4  signUpBox mt-3 mt-sm-5  ">
+        <div className="col-11  col-sm-6 col-md-4  signUpBox  ">
           <h3 className="text-center ">Signup</h3>
           <form
             autoComplete="off"
             className="form-group"
             onSubmit={SignUpSubmitHandler}
           >
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row d-flex justify-content-center align-items-center">
+              <div className="col-11 col-sm-9">
                 <label className="labels" htmlFor="Name">
                   {" "}
                   Name
@@ -155,8 +153,8 @@ const SignUp = () => {
               </div>
             </div>
 
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row  d-flex justify-content-center align-items-center">
+              <div className="col-11 col-sm-9">
                 <label className="labels" htmlFor="Location">
                   Location
                 </label>
@@ -172,8 +170,8 @@ const SignUp = () => {
               </div>
             </div>
 
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row  d-flex justify-content-center align-items-center ">
+              <div className="col-11 col-sm-9">
                 <label className="labels" htmlFor="state">
                   state
                 </label>
@@ -189,8 +187,8 @@ const SignUp = () => {
               </div>
             </div>
 
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row  d-flex justify-content-center align-items-center ">
+              <div className="col-11 col-sm-9">
                 <label className="labels" htmlFor="district">
                   district
                 </label>
@@ -205,8 +203,8 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row  d-flex justify-content-center align-items-center">
+              <div className="col-11 col-sm-9">
                 <label className="labels" htmlFor="tehsil">
                   tehsil
                 </label>
@@ -221,8 +219,8 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row  d-flex justify-content-center align-items-center">
+              <div className="col-11 col-sm-9">
                 <label className="labels " htmlFor="village">
                   village
                 </label>
@@ -238,8 +236,8 @@ const SignUp = () => {
               </div>
             </div>
 
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row  d-flex justify-content-center align-items-center">
+              <div className="col-11 col-sm-9">
                 <label className="labels" htmlFor="Phone">
                   Phone No.
                 </label>
@@ -254,8 +252,8 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row  d-flex justify-content-center align-items-center ">
+              <div className="col-11 col-sm-9">
                 <label className="labels" htmlFor="Email">
                   Email
                 </label>
@@ -270,8 +268,8 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            <div className="row ">
-              <div className="col-10 offset-1">
+            <div className="row  d-flex justify-content-center align-items-center">
+              <div className="col-11 col-sm-9 ">
                 <label className="labels" htmlFor="Password">
                   Password
                 </label>
@@ -286,17 +284,17 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            <div className="row mt-2   ">
-              <div className="col-8 offset-2  submitSignUp  ">
+            <div className="row  d-flex justify-content-center align-items-center mt-2   ">
+              <div className="col-11 col-sm-9  submitSignUp  ">
                 <button type="submit" className="btn-primary ">
                   SignUp
                 </button>
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-8 offset-2   ">
-                <p className="login-para">
+            <div className="row  d-flex justify-content-center align-items-center">
+              <div className="col-11   ">
+                <p className="login-para text-center">
                   Already have an account?
                   <a className="login-link" href="/login">
                     LogIn!

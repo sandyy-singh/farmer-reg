@@ -1,3 +1,8 @@
+@mixin mob {
+    @media (max-width:460px) {
+        @content;
+    }
+}
 .register{
     height: 100vh;
     width: 100%;
@@ -8,6 +13,10 @@
     background-color: rgb(161, 179, 179);
     overflow-x: hidden;
     overflow-y: auto;
+    @include mob {
+        background: none;
+        background-color: #739f65;
+    }
 
 }
 .btnn-1{

@@ -10,10 +10,11 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { apppp } from "./firebase";
 
-const firestore = getFirestore(apppp);
+
 const auth = getAuth(apppp);
 
 const FarmerOnBoardinng = () => {
+    const firestore = getFirestore(apppp);
     const [userName, setUuserName] = useState();
     const { userId } = useUserContext();
 
@@ -22,14 +23,17 @@ const FarmerOnBoardinng = () => {
         if (!localStorage.getItem("token")) {
           navigate("/login");
         }
-        
+        // console.log(userId)
     onAuthStateChanged(auth, (user) => {
         if (user) {
-          const email = user;
-          setUuserName(email.auth.currentUser.email);
+          const useremail = user;
+          setUuserName(useremail.auth.currentUser.email);
+        
+
+        //   console.log(userId)
         }
       });
-      }, []);
+      }, [userId]);
 
     const [farmerName, setFarmerName] = useState("");
     const [address, setAddress] = useState("");
@@ -52,6 +56,7 @@ const FarmerOnBoardinng = () => {
 
     const FarmerOnBoardinngSubmit = async (e) => {
         e.preventDefault();
+        console.log(userId)
         try {
             await addDoc(
                 collection(firestore, `FarmerOnBoardinng/${userId}/Farmer_reg`),
@@ -133,16 +138,16 @@ const FarmerOnBoardinng = () => {
         <div>
             <Navbar  name={userName} />
             <div className="container-fluid FarmerOnBoardinng  ">
-                <div className=" row  d-flex justify-content-center align-items-center FarmerOnBoardinng-box ">
-                    <div className="col-12   ">
+                <div className=" row  d-flex justify-content-center align-items-center  ">
+                    <div className="col-11  FarmerOnBoardinng-box ">
                         <h4 className="text-center ">Farmers On Boardinng</h4>
                         <form
                             autoComplete="off"
                             className="form-group"
                             onSubmit={FarmerOnBoardinngSubmit}
                         >
-                            <div className="row ">
-                                <div className="col-10 offset-1">
+                            <div className="row d-flex justify-content-center align-items-center">
+                                <div className="col-11">
                                     <label className="labels-1" htmlFor="farmerName">
                                         Farmer Name
                                     </label>
@@ -158,8 +163,8 @@ const FarmerOnBoardinng = () => {
                                 </div>
                             </div>
 
-                            <div className="row ">
-                                <div className="col-10 offset-1">
+                            <div className="row d-flex justify-content-center align-items-center ">
+                                <div className="col-11">
                                     <label className="labels-1" htmlFor="address">
                                         Address
                                     </label>
@@ -175,8 +180,8 @@ const FarmerOnBoardinng = () => {
                                 </div>
                             </div>
 
-                            <div className="row ">
-                                <div className="col-10 offset-1">
+                            <div className="row d-flex justify-content-center align-items-center">
+                                <div className="col-11">
                                     <label className="labels-1" htmlFor="phoneNumber">
                                         phone Number
                                     </label>
@@ -192,8 +197,8 @@ const FarmerOnBoardinng = () => {
                                 </div>
                             </div>
 
-                            <div className="row ">
-                                <div className="col-10 offset-1">
+                            <div className="row d-flex justify-content-center align-items-center ">
+                                <div className="col-11">
                                     <label className="labels-1" htmlFor="landHolding">
                                         Total Land Holding(in Acres )
                                     </label>
@@ -208,8 +213,8 @@ const FarmerOnBoardinng = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="row ">
-                                <div className="col-10 offset-1">
+                            <div className="row d-flex justify-content-center align-items-center ">
+                                <div className="col-11">
                                     <label className="labels-1" htmlFor="thisSeason">
                                         Crop Sowing this season
                                     </label>
@@ -224,8 +229,8 @@ const FarmerOnBoardinng = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="row ">
-                                <div className="col-10 offset-1">
+                            <div className="row d-flex justify-content-center align-items-center">
+                                <div className="col-11">
                                     <label className="labels-1 " htmlFor="previousSeason">
                                         Crop Sowing previous season
                                     </label>
@@ -241,8 +246,8 @@ const FarmerOnBoardinng = () => {
                                 </div>
                             </div>
 
-                            <div className="row ">
-                                <div className="col-10 offset-1">
+                            <div className="row d-flex justify-content-center align-items-center">
+                                <div className="col-11">
                                     <label className="labels-1" htmlFor="aadharPanCard">
                                         Aadhar/Pan Card Number
                                     </label>
@@ -258,8 +263,8 @@ const FarmerOnBoardinng = () => {
                                 </div>
                             </div>
 
-                            <div className="row ">
-                                <div className="col-10 offset-1">
+                            <div className="row d-flex justify-content-center align-items-center">
+                                <div className="col-11">
                                     <div>
                                         <span>Farming Practices</span>
                                     </div>

@@ -1,49 +1,74 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import { useUserContext } from "./UserProvider";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+import { apppp } from "./firebase";
+const firestore = getFirestore(apppp);
 
 const EditByNumber = () => {
-  const navigate = useNavigate();
+  const [farmerName, setFarmerName] = useState("");
+  const [farmerNumber, setFarmerNumber] = useState("");
+  const { userId,editData,setEditData } = useUserContext();
+  // const navigate = useNavigate();
 
-  const submitEditByNumber = (e) => {
+  const getDataByNumber = async (e) => {
     e.preventDefault();
-    navigate("/EditForm");
+    console.log(userId);
+    const collectionRef =  collection(firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
+    const q =  query(collectionRef,where("phoneNumber", "==", farmerNumber),
+       
+    );
+    const snpshot = await getDocs(q)
+    const store =  snpshot.forEach((data) => setEditData(data.data()));
+    
+    console.log(editData)
   };
 
   return (
     <div className="main">
       <Navbar />
       <div className="container-fluid EnterNumber ">
-        <div className=" row  enterNumber-bg ">
-          <div className="col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-4 offset-lg-4  EnterNumberbox p-4">
+        <div className=" row d-flex justify-content-center align-items-center   ">
+          <div className="col-11  col-sm-6 col-md-4  EnterNumberbox p-4">
             <h4 className="text-center mt-2">
-        
-              Enter your Farmer Name and Number
+              Enter Farmer Name and Number
             </h4>
             <form
               autoComplete="off"
               className="form-group "
-              onSubmit={submitEditByNumber}
+              onSubmit={getDataByNumber}
             >
-              <div className="row">
-                <div className="col-8 offset-2 mt-5">
-                  <label htmlFor="FPOname">Enter Farmer Name:</label>
+              <div className="row d-flex justify-content-center align-items-center ">
+                <div className="col-11   mt-5">
+                  <label htmlFor="farmerName">Enter Farmer Name:</label>
                   <input
                     type="text"
                     className="form-control mt-3"
-                    id="FPOname"
-                    placeholder="Enter your FPO Name "
+                    id="farmerName"
+                    placeholder="Enter farmer Name "
+                    value={farmerName}
+                    onChange={(e) => setFarmerName(e.target.value)}
                     required
                   />
                 </div>
 
-                <div className="col-8 offset-2 mt-2">
-                  <label htmlFor="PhoneNumber">Enter Farmer number:</label>
+                <div className="col-11 mt-2">
+                  <label htmlFor="farmerNumber">Enter Farmer number:</label>
                   <input
                     type="number"
                     className="form-control mt-3"
-                    id="PhoneNumber"
+                    id="farmerNumber"
                     placeholder="Enter your number "
+                    value={farmerNumber}
+                    onChange={(e) => setFarmerNumber(e.target.value)}
                     required
                   />
                 </div>

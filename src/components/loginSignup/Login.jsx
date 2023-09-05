@@ -12,7 +12,7 @@ import { useUserContext } from "./UserProvider";
 const Login = () => {
   const auth = getAuth(apppp);
   const navigate = useNavigate();
-  const { setUserId } = useUserContext();
+  const { userId,setUserId } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -58,11 +58,12 @@ const Login = () => {
         // console.log(userId)
         const uid = user.uid;
         localStorage.setItem("token", user.accessToken);
-        return uid;
+        setUserId(uid);
+        console.log(userId)
       })
       .then((response) => {
-        setUserId(response);
-        console.log(response);
+  
+      
         setShowAlert(true);
         // alert("Welcome to CarbonFarming Family");
       })
@@ -118,8 +119,8 @@ const Login = () => {
           </div>
         </div>
       )}
-      <div className=" row  d-flex justify-content-center align-items-center mt-5 mt-sm-5 ">
-        <div className="col-11  col-sm-8 col-md-6 col-lg-4 loginBox p-2 mt-5 mt-sm-5 ">
+      <div className=" row  d-flex justify-content-center align-items-center   ">
+        <div className="col-11  col-sm-8 col-md-6 col-lg-4 loginBox p-2   ">
           <div className="logo  ">
             <AiOutlineUser />
           </div>
@@ -172,15 +173,9 @@ const Login = () => {
 
           
 
-            <div className="row">
-              <div className="col-6 offset-1 mb-sm-2 ">
-                <input className="logincheckbox" type="checkbox" />
-                &nbsp;
-                <label className="check" htmlFor="vehicle2">
-                  Remember Me
-                </label>
-              </div>
-              <div className="col-5">
+            <div className="row d-flex justify-content-center align-items-center">
+
+              <div className="col-10 flex-row-reverse">
                 <a href="/EnterNumber" className="login-Forgot anchor">
                   Forgot password?
                 </a>
@@ -194,8 +189,8 @@ const Login = () => {
                 </button>
               </div>
             </div>
-            <div className="row">
-              <div className="col-8 offset-2 mb-sm-2   ">
+            <div className="row d-flex justify-content-center align-items-center">
+              <div className="col-10 mb-sm-2   ">
                 <p className="login-para">
                   Don't have an account?
                   <a className="login-link anchor" href="/signup">

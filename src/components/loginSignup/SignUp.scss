@@ -4,13 +4,19 @@
     }
 }
 
+
+
 .register1{
     background: url("../../Images/bg1.jpeg") no-repeat 0 0;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 110vh;
+    height: 100vh;
     background-color: rgb(161, 179, 179);
+    @include mob {
+        background: none;
+        background-color: #739f65;
+    }
 }
 // .signup-background{
 //     // margin-top: 2.5rem;
@@ -26,8 +32,12 @@
     // position: relative;
     border: 0.1px solid rgb(121, 120, 120);
     padding: 15px;
-    height: auto;
-    width: auto;
+
+    //vertically position center
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 
 
 }
@@ -74,6 +84,7 @@
         color: white;
         background-color: rgb(22, 117, 62);
         border: none;
+        border-radius: 10px;
         &:hover{
             background-color: rgb(23, 47, 33); 
         }
