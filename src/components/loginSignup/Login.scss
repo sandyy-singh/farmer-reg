@@ -68,6 +68,11 @@ label {
     }
 
 }
+.emailError{
+    color: red;
+    font-size: 12px;
+    text-align: center;
+}
 
 .loginSubmit {
     display: flex;
@@ -163,18 +168,22 @@ p {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    color: #f5f3f3;
   }
   
   .popup-content {
-    background-color: rgb(92, 174, 83);
+    background-color: rgb(95, 105, 94);
     border-radius: 10px;
-    padding: 60px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     color: #f5f3f3;
+    
   }
-  
+  .para1{
+    color: white;
+}
   /* Style for the close button */
   .popup button {
     background-color: transparent;
@@ -184,7 +193,7 @@ p {
     margin-top: 10px;
     width: 90px;
     height: 35px;
-    background-color: rgb(155, 151, 143);
+    background-color: rgb(26, 194, 65);
     border-radius: 15px;
     border: none;
     outline: none;

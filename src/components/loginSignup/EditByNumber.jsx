@@ -16,38 +16,53 @@ const firestore = getFirestore(apppp);
 const EditByNumber = () => {
   const [farmerName, setFarmerName] = useState("");
   const [farmerNumber, setFarmerNumber] = useState("");
-  const { userId,editData,setEditData } = useUserContext();
+  const { userId, editData, setEditData } = useUserContext();
   // const navigate = useNavigate();
 
   const getDataByNumber = async (e) => {
+    const user_Id = userId;
     e.preventDefault();
-    console.log(userId);
-    const collectionRef =  collection(firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
-    const q =  query(collectionRef,where("phoneNumber", "==", farmerNumber),
-       
-    );
-    const snpshot = await getDocs(q)
-    const store =  snpshot.forEach((data) => setEditData(data.data()));
-    
-    console.log(editData)
+    // console.log(userId);
+    const collectionRef = collection( firestore,`FarmerOnBoardinng/${user_Id}/Farmer_reg`);
+    const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
+
+    const snpshot = await getDocs(q);
+    snpshot.forEach((data) => setEditData(data.data()));
+
+    console.log(editData);
   };
 
+
+  // const getDataByNumber = async (e) => {
+  //   e.preventDefault();
+  //   const user_Id = userId;
+  //   const collectionRef = collection(firestore, `FarmerOnBoarding/${user_Id}/Farmer_reg`);
+  //   const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
+  //   try{ 
+  //     const snapshot = await getDocs(q);
+  //     snapshot.forEach((doc) => {
+  //       setEditData((doc.data()));
+  //       console.log(editData)
+  //     });
+  
+  //   } catch (error) {
+  //     console.error("Error getting data:", error);
+  //   }
+  // };
   return (
     <div className="main">
       <Navbar />
       <div className="container-fluid EnterNumber ">
         <div className=" row d-flex justify-content-center align-items-center   ">
           <div className="col-11  col-sm-6 col-md-4  EnterNumberbox p-4">
-            <h4 className="text-center mt-2">
-              Enter Farmer Name and Number
-            </h4>
+            <h4 className="text-center mt-2">Enter Farmer Name and Number</h4>
             <form
               autoComplete="off"
               className="form-group "
               onSubmit={getDataByNumber}
             >
               <div className="row d-flex justify-content-center align-items-center ">
-                <div className="col-11   mt-5">
+                <div className="col-11   mt-4">
                   <label htmlFor="farmerName">Enter Farmer Name:</label>
                   <input
                     type="text"

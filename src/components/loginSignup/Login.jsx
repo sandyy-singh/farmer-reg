@@ -15,10 +15,11 @@ const Login = () => {
   const { userId,setUserId } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+
   const [isValidEmail, setIsValidEmail] = useState(true);
   // const [user, setUser] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [error, setError] = useState(false);
 
   // eye button function
   const [passwordType, setPasswordType] = useState("password");
@@ -42,7 +43,7 @@ const Login = () => {
 
   // submit login form
 
-  const submitForm = (e) => {
+  const submitForm =async (e) => {
     e.preventDefault();
     if (!isValidEmail) {
       alert("Please enter a valid email address");
@@ -51,11 +52,10 @@ const Login = () => {
       return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
+   await signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         console.log(response);
         const user = response.user;
-        // console.log(userId)
         const uid = user.uid;
         localStorage.setItem("token", user.accessToken);
         setUserId(uid);
@@ -77,10 +77,8 @@ const Login = () => {
       })
 
       .catch((err) => {
-        console.log(error);
-        alert("something wrong, please try again.");
-        setError(err.message);
-
+        // alert("something wrong, please try again.");
+        setError(true);
         console.log(err);
       });
     setEmail("");
@@ -114,8 +112,17 @@ const Login = () => {
         <div className="popup">
           <div className="popup-content">
             <h2>LogIn successfull </h2>
-            <p>Welcome to CarbonFarming Family</p>
+            <p className="para1">Welcome to CarbonFarming Family</p>
             <button onClick={() => setShowAlert(false)}>Close</button>
+          </div>
+        </div>
+      )}
+      {error && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>LogIn  Unsuccessfull </h2>
+            <p className="para1">something wrong, please try again</p>
+            <button onClick={() => setError(false)}>Close</button>
           </div>
         </div>
       )}

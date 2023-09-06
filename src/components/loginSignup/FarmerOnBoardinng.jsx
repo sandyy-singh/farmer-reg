@@ -23,7 +23,7 @@ const FarmerOnBoardinng = () => {
         if (!localStorage.getItem("token")) {
           navigate("/login");
         }
-        // console.log(userId)
+        console.log(userId)
     onAuthStateChanged(auth, (user) => {
         if (user) {
           const useremail = user;
