@@ -8,7 +8,7 @@ import EditForm from "./components/loginSignup/EditForm";
 import Contact from "./components/loginSignup/Contact";
 import EditByNumber from "./components/loginSignup/EditByNumber";
 import FarmerOnBoardinng from "./components/loginSignup/FarmerOnBoardinng";
-
+import FarmerData from "./components/loginSignup/FarmerData";
 
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -36,6 +36,8 @@ function App() {
          <Route path="/EditForm" element={<EditForm />}></Route>
          <Route path="/Contact" element={<Contact />}></Route>
          <Route path="/EditByNumber" element={<EditByNumber />}></Route>
+         <Route path="/FarmerData" element={<FarmerData />}></Route>
+         
         </Routes>
       </BrowserRouter>
     </div>

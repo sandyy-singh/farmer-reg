@@ -55,6 +55,7 @@ const FarmerOnBoardinng = () => {
 
 
     const FarmerOnBoardinngSubmit = async (e) => {
+        
         e.preventDefault();
         console.log(userId)
         try {
@@ -68,7 +69,7 @@ const FarmerOnBoardinng = () => {
                     thisSeason,
                     previousSeason,
                     aadharPanCard,
-                    isCropBeforeSowing,
+                    isCropBeforeSowing, 
                     isCoverCropping,
                     isIntercropping,
                     isBioFertilizers,

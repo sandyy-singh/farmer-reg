@@ -1,23 +1,32 @@
+//react 
 import React from "react";
-import "./Login.scss";
 import { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
-// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+
+//context api
+import { useUserContext } from "./UserProvider";
+
+//styling
+import "./Login.scss";
+
+//firebase
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { apppp } from "./firebase";
-import { useUserContext } from "./UserProvider";
+
 
 const Login = () => {
   const auth = getAuth(apppp);
   const navigate = useNavigate();
-  const { userId,setUserId } = useUserContext();
+
+  // data from context api
+  const { userId, setUserId } = useUserContext();
+
+  // useStates
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [isValidEmail, setIsValidEmail] = useState(true);
-  // const [user, setUser] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState(false);
 
@@ -43,7 +52,7 @@ const Login = () => {
 
   // submit login form
 
-  const submitForm =async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     if (!isValidEmail) {
       alert("Please enter a valid email address");
@@ -51,61 +60,32 @@ const Login = () => {
       setPassword("");
       return;
     }
-
-   await signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         console.log(response);
         const user = response.user;
         const uid = user.uid;
         localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("uid", user.uid);
         setUserId(uid);
-        console.log(userId)
+        console.log(userId);
       })
       .then((response) => {
-  
-      
         setShowAlert(true);
-        // alert("Welcome to CarbonFarming Family");
       })
       .then(() => {
-
         setTimeout(() => {
-          navigate("/FarmerOnBoardinng")
-        }, 2000); // Hide the alert after 3 seconds (3000 milliseconds)
-      
-        //;
+          navigate("/FarmerOnBoardinng");
+        }, 1000);
       })
-
       .catch((err) => {
-        // alert("something wrong, please try again.");
         setError(true);
         console.log(err);
       });
     setEmail("");
     setPassword("");
-
-    // const loginData = {
-    //   email: email,
-    //   password: password,
-    // };
-
-    // axios
-    //   .post("https://reqres.in/api/login", loginData)
-    //   .then((response) => {
-    //     console.log(response);
-    //     localStorage.setItem("token", response.data.token);
-    //     navigate("/RegisterAsFarmer");
-    //     alert("success");
-
-    //     // console.log(name, location, phone, email, password);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     alert("fail");
-    //   });
-
-    // console.log(loginData);
   };
+
   return (
     <div className="container-fluid loginBg ">
       {showAlert && (
@@ -120,7 +100,7 @@ const Login = () => {
       {error && (
         <div className="popup">
           <div className="popup-content">
-            <h2>LogIn  Unsuccessfull </h2>
+            <h2>LogIn Unsuccessfull </h2>
             <p className="para1">something wrong, please try again</p>
             <button onClick={() => setError(false)}>Close</button>
           </div>
@@ -178,10 +158,7 @@ const Login = () => {
               </div>
             </div>
 
-          
-
             <div className="row d-flex justify-content-center align-items-center">
-
               <div className="col-10 flex-row-reverse">
                 <a href="/EnterNumber" className="login-Forgot anchor">
                   Forgot password?

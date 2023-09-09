@@ -67,7 +67,7 @@ const SignUp = () => {
         location,
         phone
       );
-      await addDoc(collection(firestore, "Users"), {
+      await addDoc(collection(firestore, "UsersData"), {
         name,
         location,
         phone,
@@ -80,7 +80,7 @@ const SignUp = () => {
     } catch (error) {
       if (error) {
         console.log(error);
-        alert("email is already registered");
+        alert("somethimg wrong,please try again");
         setName("");
         setLocation("");
         setState("");

@@ -96,6 +96,23 @@
       background-color: rgb(241, 42, 42);
     }
   }
+  .View{
+    height: 30px;
+    width: 65px;
+    outline: none;
+    border: none;
+    background: none;
+    position: relative;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+     color: rgb(40, 41, 40);
+     font-weight: 500;
+    }
+  
+  }
 
 }
 

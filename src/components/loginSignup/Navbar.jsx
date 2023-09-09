@@ -23,9 +23,16 @@ const Navbar = ({ name }) => {
       }
     });
   }, []);
+  const ViewRegistration = () => {
+
+    navigate("/FarmerData");
+
+
+  };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("uid");
     navigate("/login");
   };
 
@@ -52,6 +59,9 @@ const Navbar = ({ name }) => {
       {pupup ? (
         <div className="userPopup">
           <p>{userName}</p>
+          <button className="View" onClick={ViewRegistration}>
+           Registrations
+          </button>
           <button className="logout" onClick={logout}>
             logout
           </button>

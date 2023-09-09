@@ -20,11 +20,14 @@ const EditByNumber = () => {
   // const navigate = useNavigate();
 
   const getDataByNumber = async (e) => {
-    const user_Id = userId;
+    console.log(e);
+    // const user_Id = userId;
     e.preventDefault();
     // console.log(userId);
-    const collectionRef = collection( firestore,`FarmerOnBoardinng/${user_Id}/Farmer_reg`);
+    const collectionRef = collection( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
+    console.log(collectionRef);
     const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
+    console.log(q);
 
     const snpshot = await getDocs(q);
     snpshot.forEach((data) => setEditData(data.data()));
