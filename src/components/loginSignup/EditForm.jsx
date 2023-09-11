@@ -1,14 +1,14 @@
 import React from "react";
-// import { useState } from "react";
+// // import { useState } from "react";
 import Navbar from "./Navbar";
-import "./FarmerOnBoardinng.scss";
-import { useUserContext } from "./UserProvider";
-// import axios from "axios";
+// import "./FarmerOnBoardinng.scss";
+// // import { useUserContext } from "./UserProvider";
+// // import axios from "axios";
 
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { apppp } from "./firebase";
+// import { getFirestore, collection, addDoc } from "firebase/firestore";
+// import { apppp } from "./firebase";
 
-const firestore = getFirestore(apppp);
+// const firestore = getFirestore(apppp);
 
 const EditForm = () => {
   // const [editFarmerName, setEditFarmerName] = useState("");
@@ -25,7 +25,7 @@ const EditForm = () => {
   // const [editIsBioFertilizers, seyEditIsBioFertilizers] = useState(false);
   // const [editIsAgroforestry, setEditIsAgroforestry] = useState(false);
 
-  const { userId } = useUserContext();
+  // const { userId } = useUserContext();
 
 
 

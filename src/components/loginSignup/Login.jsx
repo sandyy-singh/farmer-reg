@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
 //context api
-import { useUserContext } from "./UserProvider";
+// import { useUserContext } from "./UserProvider";
 
 //styling
 import "./Login.scss";
@@ -21,7 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   // data from context api
-  const { userId, setUserId } = useUserContext();
+  // const { userId, setUserId } = useUserContext();
 
   // useStates
   const [email, setEmail] = useState("");
@@ -64,14 +64,17 @@ const Login = () => {
       .then((response) => {
         console.log(response);
         const user = response.user;
-        const uid = user.uid;
         localStorage.setItem("token", user.accessToken);
         localStorage.setItem("uid", user.uid);
-        setUserId(uid);
-        console.log(userId);
+        // setUserId(uid);
+      
       })
       .then((response) => {
         setShowAlert(true);
+        localStorage.getItem("token");
+     const user_idd = localStorage.getItem("uid");
+     console.log("set user id",user_idd)
+
       })
       .then(() => {
         setTimeout(() => {

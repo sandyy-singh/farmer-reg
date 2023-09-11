@@ -2,7 +2,7 @@ import React from "react";
 import { useState,useEffect } from "react";
 import Navbar from "./Navbar";
 import "./FarmerOnBoardinng.scss";
-import { useUserContext } from "./UserProvider";
+// import { useUserContext } from "./UserProvider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,8 @@ const auth = getAuth(apppp);
 const FarmerOnBoardinng = () => {
     const firestore = getFirestore(apppp);
     const [userName, setUuserName] = useState();
-    const { userId } = useUserContext();
+    // const { userId } = useUserContext();
+    const userId = localStorage.getItem("uid");
 
     
     useEffect(() => {
@@ -33,7 +34,7 @@ const FarmerOnBoardinng = () => {
         //   console.log(userId)
         }
       });
-      }, [userId]);
+      }, []);
 
     const [farmerName, setFarmerName] = useState("");
     const [address, setAddress] = useState("");
@@ -106,33 +107,34 @@ const FarmerOnBoardinng = () => {
         setIsBioFertilizers("");
         setIsAgroforestry("");
 
-        const data = {
-            farmerName,
-            address,
-            phoneNumber,
-            landHolding,
-            thisSeason,
-            previousSeason,
-            aadharPanCard,
-            isCropBeforeSowing,
-            isCoverCropping,
-            isIntercropping,
-            isBioFertilizers,
-            isAgroforestry,
-        };
+        // const data = {
+        //     farmerName,
+        //     address,
+        //     phoneNumber,
+        //     landHolding,
+        //     thisSeason,
+        //     previousSeason,
+        //     aadharPanCard,
+        //     isCropBeforeSowing,
+        //     isCoverCropping,
+        //     isIntercropping,
+        //     isBioFertilizers,
+        //     isAgroforestry,
+        // };
 
-        axios
-            .post(
-                "https://dcdataapp-default-rtdb.firebaseio.com/farmerReg.json",
-                data
-            )
-            .then((response) => {
-                console.log(response);
-                console.log();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        // axios
+        //     .post(
+        //         "https://dcdataapp-default-rtdb.firebaseio.com/farmers.json",
+        //         data
+        //     )
+        //     .then((response) => {
+        //         console.log(response);
+        //         console.log();
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+
     };
 
     return (

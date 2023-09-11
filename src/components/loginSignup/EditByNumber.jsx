@@ -16,14 +16,14 @@ const firestore = getFirestore(apppp);
 const EditByNumber = () => {
   const [farmerName, setFarmerName] = useState("");
   const [farmerNumber, setFarmerNumber] = useState("");
-  const { userId, editData, setEditData } = useUserContext();
+  const {  editData, setEditData } = useUserContext();
   // const navigate = useNavigate();
-
+  const userId = localStorage.getItem("uid");
   const getDataByNumber = async (e) => {
     console.log(e);
-    // const user_Id = userId;
+  
     e.preventDefault();
-    // console.log(userId);
+    console.log(userId);
     const collectionRef = collection( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
     console.log(collectionRef);
     const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
