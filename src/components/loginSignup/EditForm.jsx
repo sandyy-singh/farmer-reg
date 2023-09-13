@@ -1,36 +1,83 @@
 import React from "react";
-// // import { useState } from "react";
+import { useState } from "react";
 import Navbar from "./Navbar";
-// import "./FarmerOnBoardinng.scss";
-// // import { useUserContext } from "./UserProvider";
-// // import axios from "axios";
+import "./FarmerOnBoardinng.scss";
+import { useUserContext } from "./UserProvider";
+// import axios from "axios";
 
-// import { getFirestore, collection, addDoc } from "firebase/firestore";
-// import { apppp } from "./firebase";
+import {
+  getFirestore,
+  doc,
+  updateDoc,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
+import { apppp } from "./firebase";
 
-// const firestore = getFirestore(apppp);
+const firestore = getFirestore(apppp);
+
+
+
 
 const EditForm = () => {
-  // const [editFarmerName, setEditFarmerName] = useState("");
-  // const [editAddress, setEditAddress] = useState("");
-  // const [editPhoneNumber, setEditPhoneNumber] = useState("");
-  // const [ediitLandHolding, setEditLandHolding] = useState("");
-  // const [editThisSeason, setEditThisSeason] = useState("");
-  // const [editPreviousSeason, setEditPreviousSeason] = useState("");
-  // const [editAadharPanCard, setEditAadharPanCard] = useState("");
 
-  // const [editIsCropBeforeSowing, setEditIsCropBeforeSowing] = useState(false);
-  // const [editIsCoverCropping, seyEditIsCoverCropping] = useState(false);
-  // const [editIsIntercropping, setEditIsIntercropping] = useState(false);
-  // const [editIsBioFertilizers, seyEditIsBioFertilizers] = useState(false);
-  // const [editIsAgroforestry, setEditIsAgroforestry] = useState(false);
-
-  // const { userId } = useUserContext();
+  
+  const { editData,farmerNumber } = useUserContext();
 
 
+  const [editFarmerName, setEditFarmerName] = useState(editData.farmerName);
+  const [editAddress, setEditAddress] = useState(editData.address);
+  const [editPhoneNumber, setEditPhoneNumber] = useState(editData.phoneNumber);
+  const [ediitLandHolding, setEditLandHolding] = useState(editData.landHolding);
+  const [editThisSeason, setEditThisSeason] = useState(editData.thisSeason);
+  const [editPreviousSeason, setEditPreviousSeason] = useState(
+    editData.previousSeason
+  );
+  const [editAadharPanCard, setEditAadharPanCard] = useState(
+    editData.aadharPanCard
+  );
 
+  const [editIsCropBeforeSowing, setEditIsCropBeforeSowing] = useState(
+    editData.isCropBeforeSowing
+  );
+  const [editIsCoverCropping, setEditIsCoverCropping] = useState(
+    editData.isCoverCropping
+  );
+  const [editIsIntercropping, setEditIsIntercropping] = useState(
+    editData.isIntercropping
+  );
+  const [editIsBioFertilizers, seyEditIsBioFertilizers] = useState(
+    editData.isBioFertilizers
+  );
+  const [editIsAgroforestry, setEditIsAgroforestry] = useState(
+    editData.isAgroforestry
+  );
 
+  const updateData = async () => {
+      
+    const userId = localStorage.getItem("uid");
+    console.log(userId);
+    const docRef = doc( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
+    console.log(docRef);
 
+    const snpshot = await updateDoc(docRef, {
+      farmerName: editFarmerName,
+      address: editAddress,
+      phoneNumber: editPhoneNumber,
+      landHolding: ediitLandHolding,
+      thisSeason: editThisSeason,
+      previousSeason: editPreviousSeason,
+      aadharPanCard: editAadharPanCard,
+      isCropBeforeSowing: editIsCropBeforeSowing,
+      isCoverCropping: editIsCoverCropping,
+      isIntercropping: editIsIntercropping,
+      isBioFertilizers: editIsBioFertilizers,
+      isAgroforestry: editIsAgroforestry,
+    });
+
+    console.log(snpshot);
+  };
 
   return (
     <div>
@@ -42,7 +89,7 @@ const EditForm = () => {
             <form
               autoComplete="off"
               className="form-group"
-         
+              onSubmit={updateData}
             >
               <div className="row ">
                 <div className="col-10 offset-1">
@@ -54,7 +101,8 @@ const EditForm = () => {
                     className="form-control form-inputs "
                     id="farmerName"
                     placeholder="Enter your farmer Name"
-                    
+                    value={editFarmerName}
+                    onChange={(e) => setEditFarmerName(e.target.value)}
                     required
                   />
                 </div>
@@ -70,7 +118,8 @@ const EditForm = () => {
                     className="form-control form-inputs"
                     id="address"
                     placeholder="Enter your address"
-              
+                    value={editAddress}
+                    onChange={(e) => setEditAddress(e.target.value)}
                     required
                   />
                 </div>
@@ -86,7 +135,8 @@ const EditForm = () => {
                     className="form-control form-inputs"
                     id="phoneNumber"
                     placeholder="Enter your Phone Number"
-
+                    value={editPhoneNumber}
+                    onChange={(e) => setEditPhoneNumber(e.target.value)}
                     required
                   />
                 </div>
@@ -102,7 +152,8 @@ const EditForm = () => {
                     className="form-control form-inputs"
                     id="landHolding"
                     placeholder="Enter your land Holding"
-
+                    value={ediitLandHolding}
+                    onChange={(e) => setEditLandHolding(e.target.value)}
                     required
                   />
                 </div>
@@ -117,7 +168,8 @@ const EditForm = () => {
                     className="form-control form-inputs"
                     id="thisSeason"
                     placeholder="Enter Crop Sowing this season"
-
+                    value={editThisSeason}
+                    onChange={(e) => setEditThisSeason(e.target.value)}
                     required
                   />
                 </div>
@@ -132,7 +184,8 @@ const EditForm = () => {
                     className="form-control form-inputs"
                     id="previousSeason"
                     placeholder="Enter Crop Sowing previous season"
-
+                    value={editPreviousSeason}
+                    onChange={(e) => setEditPreviousSeason(e.target.value)}
                     required
                   />
                 </div>
@@ -148,7 +201,8 @@ const EditForm = () => {
                     className="form-control form-inputs"
                     id="aadharPanCard"
                     placeholder="Enter your Phone No."
-
+                    value={editAadharPanCard}
+                    onChange={(e) => setEditAadharPanCard(e.target.value)}
                     required
                   />
                 </div>
@@ -164,7 +218,8 @@ const EditForm = () => {
                       className="form-check-input form-input1"
                       type="checkbox"
                       id="flexCheckDefault1"
-
+                      value={editIsCropBeforeSowing}
+                      onChange={(e) => setEditIsCropBeforeSowing(true)}
                     />
                     <label
                       className="form-check-label labels-1"
@@ -179,7 +234,8 @@ const EditForm = () => {
                       className="form-check-input form-input1"
                       type="checkbox"
                       id="flexCheckChecked2"
-
+                      value={editIsCoverCropping}
+                      onChange={(e) => setEditIsCoverCropping(true)}
                     />
                     <label
                       className="form-check-label labels-1"
@@ -192,9 +248,9 @@ const EditForm = () => {
                     <input
                       className="form-check-input form-input1"
                       type="checkbox"
-   
+                      value={editIsIntercropping}
+                      onChange={(e) => setEditIsIntercropping(true)}
                       id="flexCheckDefault3"
-
                     />
                     <label
                       className="form-check-label labels-1"
@@ -208,7 +264,8 @@ const EditForm = () => {
                       className="form-check-input form-labels-1"
                       type="checkbox"
                       id="flexCheckDefault4"
-
+                      value={editIsBioFertilizers}
+                      onChange={(e) => seyEditIsBioFertilizers(true)}
                     />
                     <label
                       className="form-check-label labels-1"
@@ -221,9 +278,9 @@ const EditForm = () => {
                     <input
                       className="form-check-input form-input1"
                       type="checkbox"
-        
+                      value={editIsAgroforestry}
+                      onChange={(e) => setEditIsAgroforestry(true)}
                       id="flexCheckDefault5"
-
                     />
                     <label
                       className="form-check-label labels-1"

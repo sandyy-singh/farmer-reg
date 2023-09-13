@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import Navbar from "./Navbar";
 import "./FarmerOnBoardinng.scss";
 // import { useUserContext } from "./UserProvider";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -291,10 +291,11 @@ const FarmerOnBoardinng = () => {
                                         <input
                                             className="form-check-input form-input1"
                                             type="checkbox"
-                                            value={isCoverCropping}
                                             id="flexCheckChecked2"
+                                            value={isCoverCropping}
+                                     
                                             onChange={(e) => setIsCoverCropping(true)}
-                                        />
+                                        /> 
                                         <label
                                             className="form-check-label labels-1"
                                             htmlFor="flexCheckChecked2"

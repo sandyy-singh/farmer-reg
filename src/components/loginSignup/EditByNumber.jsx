@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useUserContext } from "./UserProvider";
 import {
@@ -15,25 +15,43 @@ const firestore = getFirestore(apppp);
 
 const EditByNumber = () => {
   const [farmerName, setFarmerName] = useState("");
-  const [farmerNumber, setFarmerNumber] = useState("");
-  const {  editData, setEditData } = useUserContext();
-  // const navigate = useNavigate();
-  const userId = localStorage.getItem("uid");
-  const getDataByNumber = async (e) => {
-    console.log(e);
+  // const [farmerNumber, setFarmerNumber] = useState("");
+  const {  editData, setEditData,farmerNumber, setFarmerNumber } = useUserContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+
+    const getDataByNumber = async (e) => {
+
+      console.log(e);
+    
+      // e.preventDefault();
+      const userId = localStorage.getItem("uid");
+      console.log(userId);
+      const collectionRef = collection( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
+      console.log(collectionRef);
+      const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
+      console.log(q);
   
-    e.preventDefault();
-    console.log(userId);
-    const collectionRef = collection( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
-    console.log(collectionRef);
-    const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
-    console.log(q);
+      const snpshot = await getDocs(q);
+      snpshot.forEach((data) =>{
+        setEditData(data.data())
+   
+      } );
+  
+      console.log(editData);
+    };
 
-    const snpshot = await getDocs(q);
-    snpshot.forEach((data) => setEditData(data.data()));
+    getDataByNumber();
 
-    console.log(editData);
-  };
+  }, [farmerNumber]);
+
+
+const accessData =()=>{
+  navigate("/EditForm");
+  console.log("check data",editData);
+}
+
 
 
   // const getDataByNumber = async (e) => {
@@ -62,7 +80,7 @@ const EditByNumber = () => {
             <form
               autoComplete="off"
               className="form-group "
-              onSubmit={getDataByNumber}
+
             >
               <div className="row d-flex justify-content-center align-items-center ">
                 <div className="col-11   mt-4">
@@ -93,7 +111,7 @@ const EditByNumber = () => {
 
                 <div className="row mt-4   ">
                   <div className="col-8 offset-2 mb-2 EnterNumberSubmit  ">
-                    <button type="submit" className="btn-primary ">
+                    <button onClick={accessData} className="btn-primary ">
                       Continue
                     </button>
                   </div>
