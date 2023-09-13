@@ -23,9 +23,9 @@ const Navbar = ({ name }) => {
       }
     });
   }, []);
-  const ViewRegistration = () => {
+  const contact = () => {
 
-    navigate("/FarmerData");
+    navigate("/Contact");
 
 
   };
@@ -45,11 +45,9 @@ const Navbar = ({ name }) => {
             <AiOutlineHome />
           </Link>
         </li>
+
         <li>
-          <Link to="/EditByNumber">Edit-Form</Link>
-        </li>
-        <li>
-          <Link to="/Contact">Contact</Link>
+          <Link to="/FarmerData1">Registrations</Link>
         </li>
         <li className="user" onClick={() => setPopup(!pupup)}>
           <FaUserCircle />
@@ -59,8 +57,8 @@ const Navbar = ({ name }) => {
       {pupup ? (
         <div className="userPopup">
           <p>{userName}</p>
-          <button className="View" onClick={ViewRegistration}>
-           Registrations
+          <button className="View" onClick={contact}>
+           contact
           </button>
           <button className="logout" onClick={logout}>
             logout

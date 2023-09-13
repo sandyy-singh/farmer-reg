@@ -6,11 +6,13 @@ import React from 'react'
 const UserContext = createContext();
 export const UserProvider = ({ children }) => {
     const [userId, setUserId] = useState("");
-    const [editData, setEditData] = useState([]);
+    const [allData, setAllData] = useState([]);
     const [updateDataa, setUpdateDataa] = useState([]);
     const [farmerNumber, setFarmerNumber] = useState("");
+    const [ editData, setEditData] =useState([])
+    const [accessDataForEdit, setAccessDataForEdit] = useState({});
     return (
-      <UserContext.Provider value={{ userId,editData,setUserId,setEditData,updateDataa, setUpdateDataa ,farmerNumber, setFarmerNumber}}>
+      <UserContext.Provider value={{ userId,setUserId,allData, setAllData,updateDataa, setUpdateDataa ,farmerNumber, setFarmerNumber,editData, setEditData,accessDataForEdit, setAccessDataForEdit}}>
         {children}
       </UserContext.Provider>
     );

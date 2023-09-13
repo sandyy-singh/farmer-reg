@@ -15,9 +15,26 @@ const firestore = getFirestore(apppp);
 
 const EditByNumber = () => {
   const [farmerName, setFarmerName] = useState("");
-  // const [farmerNumber, setFarmerNumber] = useState("");
-  const {  editData, setEditData,farmerNumber, setFarmerNumber } = useUserContext();
+  
+  const { farmerNumber, setFarmerNumber,accessDataForEdit, setAccessDataForEdit } = useUserContext();
   const navigate = useNavigate();
+
+    //   useEffect(() => {
+  //     const listdata = async () => {
+  //         let list =[];
+  //         try{
+  //             const dbVal = await getDocs(collectionRef);
+  //             dbVal.forEach((doc)=>{
+  //              list.push({id:doc.id, ...doc.data()})
+  //             })
+  //            console.log(list)
+  //         }catch(err){
+  //             console.log(err)
+  //         }
+
+  //     };
+  //     listdata();;
+  //   }, []);
 
   useEffect(() => {
 
@@ -35,41 +52,23 @@ const EditByNumber = () => {
   
       const snpshot = await getDocs(q);
       snpshot.forEach((data) =>{
-        setEditData(data.data())
+        setAccessDataForEdit(data.data())
    
       } );
   
-      console.log(editData);
+      console.log(accessDataForEdit);
     };
 
     getDataByNumber();
 
-  }, [farmerNumber]);
+  }, [accessDataForEdit, setAccessDataForEdit,farmerNumber ]);
 
 
 const accessData =()=>{
   navigate("/EditForm");
-  console.log("check data",editData);
+  console.log("check data",accessDataForEdit);
 }
 
-
-
-  // const getDataByNumber = async (e) => {
-  //   e.preventDefault();
-  //   const user_Id = userId;
-  //   const collectionRef = collection(firestore, `FarmerOnBoarding/${user_Id}/Farmer_reg`);
-  //   const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
-  //   try{ 
-  //     const snapshot = await getDocs(q);
-  //     snapshot.forEach((doc) => {
-  //       setEditData((doc.data()));
-  //       console.log(editData)
-  //     });
-  
-  //   } catch (error) {
-  //     console.error("Error getting data:", error);
-  //   }
-  // };
   return (
     <div className="main">
       <Navbar />

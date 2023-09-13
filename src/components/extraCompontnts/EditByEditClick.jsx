@@ -18,55 +18,56 @@ import { apppp } from "./firebase";
 
 const firestore = getFirestore(apppp);
 
+const EditByEditClick = () => {
+  const { accessDataForEdit } =useUserContext();
 
-
-
-const EditForm = () => {
-
-  
-  const { editData,farmerNumber } = useUserContext();
-
-
-  const [editFarmerName, setEditFarmerName] = useState(editData.farmerName);
-  const [editAddress, setEditAddress] = useState(editData.address);
-  const [editPhoneNumber, setEditPhoneNumber] = useState(editData.phoneNumber);
-  const [ediitLandHolding, setEditLandHolding] = useState(editData.landHolding);
-  const [editThisSeason, setEditThisSeason] = useState(editData.thisSeason);
+  const [editFarmerName, setEditFarmerName] = useState(
+    accessDataForEdit.farmerName
+  );
+  const [editAddress, setEditAddress] = useState(accessDataForEdit.address);
+  const [editPhoneNumber, setEditPhoneNumber] = useState(
+    accessDataForEdit.phoneNumber
+  );
+  const [ediitLandHolding, setEditLandHolding] = useState(
+    accessDataForEdit.landHolding
+  );
+  const [editThisSeason, setEditThisSeason] = useState(
+    accessDataForEdit.thisSeason
+  );
   const [editPreviousSeason, setEditPreviousSeason] = useState(
-    editData.previousSeason
+    accessDataForEdit.previousSeason
   );
   const [editAadharPanCard, setEditAadharPanCard] = useState(
-    editData.aadharPanCard
+    accessDataForEdit.aadharPanCard
   );
 
   const [editIsCropBeforeSowing, setEditIsCropBeforeSowing] = useState(
-    editData.isCropBeforeSowing
+    accessDataForEdit.isCropBeforeSowing
   );
   const [editIsCoverCropping, setEditIsCoverCropping] = useState(
-    editData.isCoverCropping
+    accessDataForEdit.isCoverCropping
   );
   const [editIsIntercropping, setEditIsIntercropping] = useState(
-    editData.isIntercropping
+    accessDataForEdit.isIntercropping
   );
   const [editIsBioFertilizers, seyEditIsBioFertilizers] = useState(
-    editData.isBioFertilizers
+    accessDataForEdit.isBioFertilizers
   );
   const [editIsAgroforestry, setEditIsAgroforestry] = useState(
-    editData.isAgroforestry
+    accessDataForEdit.isAgroforestry
   );
 
   const updateData = async () => {
-      
     const userId = localStorage.getItem("uid");
     console.log(userId);
-    const docRef = doc( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg/
-    z2hzUu4FAcl0veompufs`);
+    const docRef = doc(
+      firestore,`FarmerOnBoardinng/${userId}/Farmer_reg/m5Qd8bUKkjh5MQdNgsaG`);
     console.log(docRef);
 
     // const q = query(docRef, where("phoneNumber", "==", farmerNumber));
     // console.log(q);
 
-    const snpshot = await setDoc(docRef, {
+    const snpshot = await updateDoc(docRef, {
       farmerName: editFarmerName,
       address: editAddress,
       phoneNumber: editPhoneNumber,
@@ -300,7 +301,10 @@ const EditForm = () => {
 
               <div className="row mt-2   ">
                 <div className="col-8 offset-2  submitOnBoardinng  ">
-                  <button type="submit" className="btn-FarmerOnBoardinng ">
+                  <button
+                    onClick={updateData}
+                    className="btn-FarmerOnBoardinng "
+                  >
                     Edit & Save
                   </button>
                 </div>
@@ -313,4 +317,4 @@ const EditForm = () => {
   );
 };
 
-export default EditForm;
+export default EditByEditClick;
