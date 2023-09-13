@@ -9,6 +9,7 @@ import {
   getFirestore,
   doc,
   updateDoc,
+  setDoc,
   collection,
   query,
   where,
@@ -58,10 +59,14 @@ const EditForm = () => {
       
     const userId = localStorage.getItem("uid");
     console.log(userId);
-    const docRef = doc( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
+    const docRef = doc( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg/
+    z2hzUu4FAcl0veompufs`);
     console.log(docRef);
 
-    const snpshot = await updateDoc(docRef, {
+    // const q = query(docRef, where("phoneNumber", "==", farmerNumber));
+    // console.log(q);
+
+    const snpshot = await setDoc(docRef, {
       farmerName: editFarmerName,
       address: editAddress,
       phoneNumber: editPhoneNumber,
