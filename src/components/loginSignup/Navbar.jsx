@@ -58,7 +58,7 @@ const Navbar = ({ name }) => {
         <div className="userPopup">
           <p>{userName}</p>
           <button className="View" onClick={contact}>
-           contact
+            contact
           </button>
           <button className="logout" onClick={logout}>
             logout
