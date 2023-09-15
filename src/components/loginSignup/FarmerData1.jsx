@@ -51,7 +51,7 @@ const FarmerData1 = () => {
       console.log("fromDbVal", fromDbVal);
     };
     listdata();
-  },[] );
+  },[]);
 
 
 
