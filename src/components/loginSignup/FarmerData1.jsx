@@ -8,6 +8,7 @@ import {
   getFirestore,
   collection,
   getDocs,
+  setDoc,
   updateDoc,
   doc,
 } from "firebase/firestore";
@@ -50,7 +51,7 @@ const FarmerData1 = () => {
       console.log("fromDbVal", fromDbVal);
     };
     listdata();
-  }, );
+  },[] );
 
 
 
@@ -87,11 +88,7 @@ const FarmerData1 = () => {
   };
 
   const editAndSave = async () => {
-    const updateData = doc(
-      firestore,
-      `FarmerOnBoardinng/${userId}/Farmer_reg`,
-      id
-    );
+    const updateData =  doc(firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`,id);
 
     try {
       const snpshot = await updateDoc(updateData, {
@@ -108,8 +105,9 @@ const FarmerData1 = () => {
         isBioFertilizers: editIsBioFertilizers,
         isAgroforestry: editIsAgroforestry,
       });
-      console.log(snpshot);
+      
       alert("thank for update")
+      console.log(snpshot);
 
     } catch (err) {
       console.log(err);
@@ -129,9 +127,7 @@ const FarmerData1 = () => {
               <tr>
                 <th>Sr.No.</th>
                 <th>FarmerName</th>
-                <th>Address</th>
                 <th>phoneNumber</th>
-                <th>Aadhar/PanCard </th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -140,9 +136,7 @@ const FarmerData1 = () => {
                 <tr key={index + 1}>
                   <td>{index + 1}</td>
                   <td>{data.farmerName}</td>
-                  <td>{data.address}</td>
                   <td>{data.phoneNumber}</td>
-                  <td>{data.aadharPanCard}</td>
                   <td>
                     <button
                       onClick={() =>
