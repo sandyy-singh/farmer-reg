@@ -43,7 +43,8 @@ const Navbar = ({ name }) => {
       <ul className="nav-links">
         <li>
           <Link to="/FarmerOnBoardinng">
-            <AiOutlineHome />
+            Home 
+            {/* <AiOutlineHome /> */}
           </Link>
         </li>
 
