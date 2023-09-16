@@ -1,6 +1,6 @@
 //react 
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
@@ -32,6 +32,14 @@ const Login = () => {
 
   // eye button function
   const [passwordType, setPasswordType] = useState("password");
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  },[])
+
+
   const togglePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
@@ -78,7 +86,7 @@ const Login = () => {
       })
       .then(() => {
         setTimeout(() => {
-          navigate("/FarmerOnBoardinng");
+          navigate("/");
           window.location.reload();
           
         }, 1000);
@@ -173,7 +181,7 @@ const Login = () => {
 
             <div className="row mt-2 pt-3 pt-sm-0  mb-2 mb--sm-0">
               <div className="col-10 offset-1 mb-sm-2 loginSubmit  ">
-                <button type="submit" className="btn-primary ">
+                <button type="submit" className="btn-primary p-1 ">
                   LogIn
                 </button>
               </div>

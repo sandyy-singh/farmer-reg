@@ -14,6 +14,7 @@
     }
 }
 
+
 .FarmerOnBoardinng{
     background: url("../../Images/bg1.jpeg") no-repeat 0 0;
     background-position: center;
@@ -29,7 +30,8 @@
         height: 125vh;
     }
     @include mob-small {
-        height: 145vh;
+    
+        height: 140vh;
     }
     @include mob {
         background: none;
@@ -83,4 +85,10 @@ span{
     box-shadow: none !important;
   
 
+}
+
+
+
+.regist{
+    background-color: #c0d3bb;
 }

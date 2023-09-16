@@ -42,7 +42,7 @@ const Navbar = ({ name }) => {
       <div className="logoText">Carbon Credit</div>
       <ul className="nav-links">
         <li>
-          <Link to="/FarmerOnBoardinng">
+          <Link to="/">
             <AiOutlineHome />
           </Link>
         </li>

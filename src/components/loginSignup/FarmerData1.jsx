@@ -132,9 +132,9 @@ const FarmerData1 = () => {
   };
 
   return (
-    <div className="farmerData">
+    <div className="farmerData mt-5">
 {  /*  <Navbar  name={userName} />    */}
-      <div className="container-fluid mt-5 ">
+      <div className="container-fluid mt-4 ">
         <div className="table-responsive">
           <table className="table table-dark table-hover table-bordered tbl">
             <thead>

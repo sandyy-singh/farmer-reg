@@ -143,15 +143,15 @@ const FarmerOnBoardinng = () => {
     };
 
     return (
-        <div>
+        <div className="pt-5 p-sm-5 regist">
             {  /*  <Navbar  name={userName} />    */}
-            <div className="container-fluid FarmerOnBoardinng  ">
+            <div className="container-fluid pt-5    ">
                 <div className=" row  d-flex justify-content-center align-items-center  ">
-                    <div className="col-11  FarmerOnBoardinng-box ">
-                        <h4 className="text-center ">Farmers On Boardinng</h4>
+                    <div className="col-11 col-sm-8 col-md-7 col-lg-5 border rounded border-secondary p-2 shadow  bg-light ">
+                        <h4 className="text-center text-danger ">Farmers On Boardinng</h4>
                         <form
                             autoComplete="off"
-                            className="form-group"
+                            className="form-group "
                             onSubmit={FarmerOnBoardinngSubmit}
                         >
                             <div className="row d-flex justify-content-center align-items-center">
@@ -208,7 +208,7 @@ const FarmerOnBoardinng = () => {
                             <div className="row d-flex justify-content-center align-items-center ">
                                 <div className="col-11">
                                     <label className="labels-1" htmlFor="landHolding">
-                                        Total Land Holding(in Acres )
+                                        Total Land Holdingi(in Acres)
                                     </label>
                                     <input
                                         type="text"
@@ -367,7 +367,7 @@ const FarmerOnBoardinng = () => {
                                 </div>
                             </div>
 
-                            <div className="row mt-2   ">
+                            <div className="row mt-2 mb-2  ">
                                 <div className="col-8 offset-2  submitOnBoardinng  ">
                                     <button type="submit" className="btn-FarmerOnBoardinng ">
                                         Submit
