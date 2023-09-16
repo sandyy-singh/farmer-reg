@@ -71,6 +71,19 @@ const FarmerData1 = () => {
     isCropBeforeSowing,
     isIntercropping
   ) => {
+    console.log(    id,
+      farmerName,
+      address,
+      phoneNumber,
+      aadharPanCard,
+      landHolding,
+      previousSeason,
+      thisSeason,
+      isAgroforestry,
+      isBioFertilizers,
+      isCoverCropping,
+      isCropBeforeSowing,
+      isIntercropping)
     setEditFarmerName(farmerName);
     setEditAddress(address);
     setEditPhoneNumber(phoneNumber);
@@ -221,6 +234,7 @@ const FarmerData1 = () => {
                         id="phoneNumber"
                         placeholder="Enter your Phone Number"
                         value={editPhoneNumber}
+                      
                         onChange={(e) => setEditPhoneNumber(e.target.value)}
                         required
                       />
@@ -304,6 +318,7 @@ const FarmerData1 = () => {
                           type="checkbox"
                           id="flexCheckDefault1"
                           value={editIsCropBeforeSowing}
+                          checked={editIsCropBeforeSowing}
                           onChange={(e) => setEditIsCropBeforeSowing(true)}
                         />
                         <label
@@ -320,6 +335,7 @@ const FarmerData1 = () => {
                           type="checkbox"
                           id="flexCheckChecked2"
                           value={editIsCoverCropping}
+                          checked={editIsCoverCropping}
                           onChange={(e) => setEditIsCoverCropping(true)}
                         />
                         <label
@@ -334,6 +350,7 @@ const FarmerData1 = () => {
                           className="form-check-input form-input1"
                           type="checkbox"
                           value={editIsIntercropping}
+                          checked={editIsIntercropping}
                           onChange={(e) => setEditIsIntercropping(true)}
                           id="flexCheckDefault3"
                         />
@@ -349,6 +366,8 @@ const FarmerData1 = () => {
                           className="form-check-input form-labels-1"
                           type="checkbox"
                           id="flexCheckDefault4"
+                          checked={editIsBioFertilizers}
+
                           value={editIsBioFertilizers}
                           onChange={(e) => seyEditIsBioFertilizers(true)}
                         />
@@ -364,6 +383,7 @@ const FarmerData1 = () => {
                           className="form-check-input form-input1"
                           type="checkbox"
                           value={editIsAgroforestry}
+                          checked={editIsAgroforestry}
                           onChange={(e) => setEditIsAgroforestry(true)}
                           id="flexCheckDefault5"
                         />
