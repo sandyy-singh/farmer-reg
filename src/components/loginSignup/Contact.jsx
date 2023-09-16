@@ -1,10 +1,18 @@
-import React from "react";
+
+import React, { useEffect } from "react";
 import "./Contact.scss";
-import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
+// import Navbar from "./Navbar";
 const Contact = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  },[])
   return (
     <div>
-      <Navbar />
+     {  /*  <Navbar  name={userName} />    */}
       <div className="contact"></div>
     </div>
   );

@@ -74,11 +74,13 @@ const Login = () => {
         localStorage.getItem("token");
      const user_idd = localStorage.getItem("uid");
      console.log("set user id",user_idd)
-
+   
       })
       .then(() => {
         setTimeout(() => {
           navigate("/FarmerOnBoardinng");
+          window.location.reload();
+          
         }, 1000);
       })
       .catch((err) => {

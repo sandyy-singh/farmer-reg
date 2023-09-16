@@ -14,6 +14,12 @@
   background-color: rgb(22, 117, 62);
   border: none;
 
+ 
+    position: sticky;
+    top: 0; /* Stick to the top of the viewport */
+ 
+    z-index: 100; /* Adjust the z-index if necessary */
+    /* Add other styles as needed */
 
 
 

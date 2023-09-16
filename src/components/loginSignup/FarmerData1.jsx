@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import "./FarmerData.scss";
-import Navbar from "./Navbar";
-
+// import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 import {
   getFirestore,
   collection,
   getDocs,
-  setDoc,
+
   updateDoc,
   doc,
 } from "firebase/firestore";
@@ -16,10 +16,8 @@ import { apppp } from "./firebase";
 const firestore = getFirestore(apppp);
 
 const FarmerData1 = () => {
-
+  const navigate = useNavigate();
   const userId = localStorage.getItem("uid");
-  // const navigate = useNavigate();
-
   const [editFarmerName, setEditFarmerName] = useState();
   const [editAddress, setEditAddress] = useState();
   const [editPhoneNumber, setEditPhoneNumber] = useState();
@@ -45,6 +43,9 @@ const FarmerData1 = () => {
   );
   const [fromDbVal, setfromDbVal] = useState([]);
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
     const listdata = async () => {
       const dbVal = await getDocs(collectionRef);
       setfromDbVal(dbVal.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
@@ -119,7 +120,7 @@ const FarmerData1 = () => {
 
   return (
     <div className="farmerData">
-      <Navbar />
+{  /*  <Navbar  name={userName} />    */}
       <div className="container-fluid mt-5 ">
         <div className="table-responsive">
           <table className="table table-dark table-hover table-bordered tbl">

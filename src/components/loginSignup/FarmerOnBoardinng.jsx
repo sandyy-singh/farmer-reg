@@ -1,6 +1,6 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import "./FarmerOnBoardinng.scss";
 // import { useUserContext } from "./UserProvider";
 // import axios from "axios";
@@ -14,8 +14,25 @@ import { apppp } from "./firebase";
 const auth = getAuth(apppp);
 
 const FarmerOnBoardinng = () => {
+    const navigate = useNavigate();
     const firestore = getFirestore(apppp);
     const [userName, setUuserName] = useState();
+
+    const [farmerName, setFarmerName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [landHolding, setLandHolding] = useState("");
+    const [thisSeason, setThisSeason] = useState("");
+    const [previousSeason, setPreviousSeason] = useState("");
+    const [aadharPanCard, setAadharPanCard] = useState("");
+
+    const [isCropBeforeSowing, setIsCropBeforeSowing] = useState(false);
+    const [isCoverCropping, setIsCoverCropping] = useState(false);
+    const [isIntercropping, setIsIntercropping] = useState(false);
+    const [isBioFertilizers, setIsBioFertilizers] = useState(false);
+    const [isAgroforestry, setIsAgroforestry] = useState(false);
+
+
     // const { userId } = useUserContext();
     const userId = localStorage.getItem("uid");
 
@@ -36,21 +53,9 @@ const FarmerOnBoardinng = () => {
       });
       }, []);
 
-    const [farmerName, setFarmerName] = useState("");
-    const [address, setAddress] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [landHolding, setLandHolding] = useState("");
-    const [thisSeason, setThisSeason] = useState("");
-    const [previousSeason, setPreviousSeason] = useState("");
-    const [aadharPanCard, setAadharPanCard] = useState("");
 
-    const [isCropBeforeSowing, setIsCropBeforeSowing] = useState(false);
-    const [isCoverCropping, setIsCoverCropping] = useState(false);
-    const [isIntercropping, setIsIntercropping] = useState(false);
-    const [isBioFertilizers, setIsBioFertilizers] = useState(false);
-    const [isAgroforestry, setIsAgroforestry] = useState(false);
 
-    const navigate = useNavigate();
+   
  
 
 
@@ -139,7 +144,7 @@ const FarmerOnBoardinng = () => {
 
     return (
         <div>
-            <Navbar  name={userName} />
+            {  /*  <Navbar  name={userName} />    */}
             <div className="container-fluid FarmerOnBoardinng  ">
                 <div className=" row  d-flex justify-content-center align-items-center  ">
                     <div className="col-11  FarmerOnBoardinng-box ">

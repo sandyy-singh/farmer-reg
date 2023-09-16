@@ -33,6 +33,7 @@ const Navbar = ({ name }) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("uid");
+    window.location.reload();
     navigate("/login");
   };
 
