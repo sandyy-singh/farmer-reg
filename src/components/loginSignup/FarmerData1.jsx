@@ -8,7 +8,6 @@ import {
   getFirestore,
   collection,
   getDocs,
-
   updateDoc,
   doc,
 } from "firebase/firestore";
@@ -52,9 +51,7 @@ const FarmerData1 = () => {
       console.log("fromDbVal", fromDbVal);
     };
     listdata();
-  },[]);
-
-
+  }, []);
 
   const HandleEditVal = async (
     id,
@@ -71,7 +68,8 @@ const FarmerData1 = () => {
     isCropBeforeSowing,
     isIntercropping
   ) => {
-    console.log(    id,
+    console.log(
+      id,
       farmerName,
       address,
       phoneNumber,
@@ -83,7 +81,8 @@ const FarmerData1 = () => {
       isBioFertilizers,
       isCoverCropping,
       isCropBeforeSowing,
-      isIntercropping)
+      isIntercropping
+    );
     setEditFarmerName(farmerName);
     setEditAddress(address);
     setEditPhoneNumber(phoneNumber);
@@ -102,7 +101,11 @@ const FarmerData1 = () => {
   };
 
   const editAndSave = async () => {
-    const updateData =  doc(firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`,id);
+    const updateData = doc(
+      firestore,
+      `FarmerOnBoardinng/${userId}/Farmer_reg`,
+      id
+    );
 
     try {
       const snpshot = await updateDoc(updateData, {
@@ -119,22 +122,19 @@ const FarmerData1 = () => {
         isBioFertilizers: editIsBioFertilizers,
         isAgroforestry: editIsAgroforestry,
       });
-      
-      alert("thank for update")
-      console.log(snpshot);
 
+      alert("thank for update");
+      console.log(snpshot);
     } catch (err) {
       console.log(err);
-      alert("something going wrong")
+      alert("something going wrong");
     }
-
-    
   };
 
   return (
-    <div className="farmerData mt-5">
-{  /*  <Navbar  name={userName} />    */}
-      <div className="container-fluid mt-4 ">
+    <div className="farmerData mt-4">
+      {/*  <Navbar  name={userName} />    */}
+      <div className="container-fluid mt-5 ">
         <div className="table-responsive">
           <table className="table table-dark table-hover table-bordered tbl">
             <thead>
@@ -183,10 +183,10 @@ const FarmerData1 = () => {
       </div>
 
       {updateForm && (
-        <div className="editForm">
-          <div className="container-fluid FarmerOnBoardinng  ">
-            <div className=" row  d-flex justify-content-center align-items-center FarmerOnBoardinng-box ">
-              <div className="col-12   ">
+        <div className="editForm  p-2 regist">
+          <div className="container-fluid     ">
+            <div className=" row  d-flex justify-content-center align-items-center  ">
+              <div className="col-11 col-sm-8 col-md-7 col-lg-5 border rounded border-secondary p-2 shadow  bg-light ">
                 <h4 className="text-center ">Farmers On Boardinng</h4>
                 <form autoComplete="off" className="form-group">
                   <div className="row ">
@@ -234,7 +234,6 @@ const FarmerData1 = () => {
                         id="phoneNumber"
                         placeholder="Enter your Phone Number"
                         value={editPhoneNumber}
-                      
                         onChange={(e) => setEditPhoneNumber(e.target.value)}
                         required
                       />
@@ -317,9 +316,10 @@ const FarmerData1 = () => {
                           className="form-check-input form-input1"
                           type="checkbox"
                           id="flexCheckDefault1"
-                       
                           checked={editIsCropBeforeSowing}
-                          onChange={(e) => setEditIsCropBeforeSowing(!editIsCropBeforeSowing)}
+                          onChange={(e) =>
+                            setEditIsCropBeforeSowing(!editIsCropBeforeSowing)
+                          }
                         />
                         <label
                           className="form-check-label labels-1"
@@ -334,9 +334,10 @@ const FarmerData1 = () => {
                           className="form-check-input form-input1"
                           type="checkbox"
                           id="flexCheckChecked2"
-                         
                           checked={editIsCoverCropping}
-                          onChange={(e) => setEditIsCoverCropping(!editIsCoverCropping)}
+                          onChange={(e) =>
+                            setEditIsCoverCropping(!editIsCoverCropping)
+                          }
                         />
                         <label
                           className="form-check-label labels-1"
@@ -349,9 +350,10 @@ const FarmerData1 = () => {
                         <input
                           className="form-check-input form-input1"
                           type="checkbox"
-                      
                           checked={editIsIntercropping}
-                          onChange={(e) => setEditIsIntercropping(!editIsIntercropping)}
+                          onChange={(e) =>
+                            setEditIsIntercropping(!editIsIntercropping)
+                          }
                           id="flexCheckDefault3"
                         />
                         <label
@@ -367,7 +369,9 @@ const FarmerData1 = () => {
                           type="checkbox"
                           id="flexCheckDefault4"
                           checked={editIsBioFertilizers}
-                          onChange={(e) => setEditIsBioFertilizers(!editIsBioFertilizers)}
+                          onChange={(e) =>
+                            setEditIsBioFertilizers(!editIsBioFertilizers)
+                          }
                         />
                         <label
                           className="form-check-label labels-1"
@@ -380,9 +384,10 @@ const FarmerData1 = () => {
                         <input
                           className="form-check-input form-input1"
                           type="checkbox"
-                       
                           checked={editIsAgroforestry}
-                          onChange={(e) => setEditIsAgroforestry(!editIsAgroforestry)}
+                          onChange={(e) =>
+                            setEditIsAgroforestry(!editIsAgroforestry)
+                          }
                           id="flexCheckDefault5"
                         />
                         <label
@@ -396,13 +401,13 @@ const FarmerData1 = () => {
                     </div>
                   </div>
 
-                  <div className="row mt-2   ">
+                  <div className="row mb-2   ">
                     <div className="col-8 offset-2  submitOnBoardinng  ">
                       <button
                         onClick={editAndSave}
                         className="btn-FarmerOnBoardinng "
                       >
-                        Edit & Save
+                        Update
                       </button>
                     </div>
                   </div>
