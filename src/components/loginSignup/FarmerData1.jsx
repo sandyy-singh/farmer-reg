@@ -31,7 +31,7 @@ const FarmerData1 = () => {
   const [editIsCoverCropping, setEditIsCoverCropping] = useState();
 
   const [editIsIntercropping, setEditIsIntercropping] = useState();
-  const [editIsBioFertilizers, seyEditIsBioFertilizers] = useState();
+  const [editIsBioFertilizers, setEditIsBioFertilizers] = useState();
   const [editIsAgroforestry, setEditIsAgroforestry] = useState();
   const [id, setId] = useState();
   const [updateForm, setUpdateForm] = useState(false);
@@ -95,7 +95,7 @@ const FarmerData1 = () => {
     setEditIsCropBeforeSowing(isCropBeforeSowing);
     setEditIsCoverCropping(isCoverCropping);
     setEditIsIntercropping(isIntercropping);
-    seyEditIsBioFertilizers(isBioFertilizers);
+    setEditIsBioFertilizers(isBioFertilizers);
     setEditIsAgroforestry(isAgroforestry);
     setId(id);
     setUpdateForm(true);
@@ -317,9 +317,9 @@ const FarmerData1 = () => {
                           className="form-check-input form-input1"
                           type="checkbox"
                           id="flexCheckDefault1"
-                          value={editIsCropBeforeSowing}
+                       
                           checked={editIsCropBeforeSowing}
-                          onChange={(e) => setEditIsCropBeforeSowing(true)}
+                          onChange={(e) => setEditIsCropBeforeSowing(!editIsCropBeforeSowing)}
                         />
                         <label
                           className="form-check-label labels-1"
@@ -334,9 +334,9 @@ const FarmerData1 = () => {
                           className="form-check-input form-input1"
                           type="checkbox"
                           id="flexCheckChecked2"
-                          value={editIsCoverCropping}
+                         
                           checked={editIsCoverCropping}
-                          onChange={(e) => setEditIsCoverCropping(true)}
+                          onChange={(e) => setEditIsCoverCropping(!editIsCoverCropping)}
                         />
                         <label
                           className="form-check-label labels-1"
@@ -349,9 +349,9 @@ const FarmerData1 = () => {
                         <input
                           className="form-check-input form-input1"
                           type="checkbox"
-                          value={editIsIntercropping}
+                      
                           checked={editIsIntercropping}
-                          onChange={(e) => setEditIsIntercropping(true)}
+                          onChange={(e) => setEditIsIntercropping(!editIsIntercropping)}
                           id="flexCheckDefault3"
                         />
                         <label
@@ -367,9 +367,7 @@ const FarmerData1 = () => {
                           type="checkbox"
                           id="flexCheckDefault4"
                           checked={editIsBioFertilizers}
-
-                          value={editIsBioFertilizers}
-                          onChange={(e) => seyEditIsBioFertilizers(true)}
+                          onChange={(e) => setEditIsBioFertilizers(!editIsBioFertilizers)}
                         />
                         <label
                           className="form-check-label labels-1"
@@ -382,9 +380,9 @@ const FarmerData1 = () => {
                         <input
                           className="form-check-input form-input1"
                           type="checkbox"
-                          value={editIsAgroforestry}
+                       
                           checked={editIsAgroforestry}
-                          onChange={(e) => setEditIsAgroforestry(true)}
+                          onChange={(e) => setEditIsAgroforestry(!editIsAgroforestry)}
                           id="flexCheckDefault5"
                         />
                         <label

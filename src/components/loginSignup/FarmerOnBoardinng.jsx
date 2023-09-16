@@ -280,9 +280,11 @@ const FarmerOnBoardinng = () => {
                                         <input
                                             className="form-check-input form-input1"
                                             type="checkbox"
+                                            checked={isCropBeforeSowing}
                                             value={isCropBeforeSowing}
+                                            
                                             id="flexCheckDefault1"
-                                            onChange={(e) => setIsCropBeforeSowing(true)}
+                                            onChange={(e) => setIsCropBeforeSowing(!isCropBeforeSowing)}
                                         />
                                         <label
                                             className="form-check-label labels-1"
@@ -297,9 +299,10 @@ const FarmerOnBoardinng = () => {
                                             className="form-check-input form-input1"
                                             type="checkbox"
                                             id="flexCheckChecked2"
+                                            checked={isCoverCropping}
                                             value={isCoverCropping}
-                                     
-                                            onChange={(e) => setIsCoverCropping(true)}
+                                            
+                                            onChange={(e) => setIsCoverCropping(!isCoverCropping)}
                                         /> 
                                         <label
                                             className="form-check-label labels-1"
@@ -312,9 +315,11 @@ const FarmerOnBoardinng = () => {
                                         <input
                                             className="form-check-input form-input1"
                                             type="checkbox"
+                                            checked={isIntercropping}
                                             value={isIntercropping}
+                                           
                                             id="flexCheckDefault3"
-                                            onChange={(e) => setIsIntercropping(true)}
+                                            onChange={(e) => setIsIntercropping(!isIntercropping)}
                                         />
                                         <label
                                             className="form-check-label labels-1"
@@ -328,8 +333,11 @@ const FarmerOnBoardinng = () => {
                                             className="form-check-input form-labels-1"
                                             type="checkbox"
                                             value={isBioFertilizers}
+                                            checked={isBioFertilizers}
+                                           
+                                            
                                             id="flexCheckDefault4"
-                                            onChange={(e) => setIsBioFertilizers(true)}
+                                          onChange={(e) => setIsBioFertilizers(!isBioFertilizers)}
                                         />
                                         <label
                                             className="form-check-label labels-1"
@@ -342,9 +350,11 @@ const FarmerOnBoardinng = () => {
                                         <input
                                             className="form-check-input form-input1"
                                             type="checkbox"
+                                            checked={isAgroforestry}
                                             value={isAgroforestry}
+                                            
                                             id="flexCheckDefault5"
-                                            onChange={(e) => setIsAgroforestry(true)}
+                                            onChange={(e) => setIsAgroforestry(!isAgroforestry)}
                                         />
                                         <label
                                             className="form-check-label labels-1"
