@@ -1,11 +1,6 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "firebase/app";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBlqUajoQSPMEaO2Z2rCAnfNYlcaLS-N_A",
   authDomain: "dcdataapp.firebaseapp.com",
@@ -17,22 +12,26 @@ const firebaseConfig = {
   measurementId: "G-74GRFTPCD7"
 };
 
-// Initialize Firebase
-export const apppp = initializeApp(firebaseConfig);
-//  const analytics = getAnalytics(app);
- 
 
-
-
-
+// // const firebaseConfig = {
+// //   apiKey: "AIzaSyBKTIsNhXsm2nHT_ItCYuycBEewO5NcHxY",
+// //   authDomain: "dcdataapp-7e793.firebaseapp.com",
+// //   projectId: "dcdataapp-7e793",
+// //   storageBucket: "dcdataapp-7e793.appspot.com",
+// //   messagingSenderId: "269300251615",
+// //   appId: "1:269300251615:web:664a9e7403b87bda92a26a"
+// // };
 
 // const firebaseConfig = {
-//   apiKey: "AIzaSyBlqUajoQSPMEaO2Z2rCAnfNYlcaLS-N_A",
-//   authDomain: "dcdataapp.firebaseapp.com",
-//   databaseURL: "https://dcdataapp-default-rtdb.firebaseio.com",
-//   projectId: "dcdataapp",
-//   storageBucket: "dcdataapp.appspot.com",
-//   messagingSenderId: "1086430953312",
-//   appId: "1:1086430953312:web:965bb556679dc411eb2805",
-//   measurementId: "G-CH6EHMHTG9"
+//   apiKey: "AIzaSyCanh_wZbCptTaxD8ATAfWRtvFSuWq-Igc",
+//   authDomain: "delhidata-d9b64.firebaseapp.com",
+//   projectId: "delhidata-d9b64",
+//   storageBucket: "delhidata-d9b64.appspot.com",
+//   messagingSenderId: "505418333049",
+//   appId: "1:505418333049:web:544d03f0a280a5dcfc0da8"
 // };
+
+
+// Initialize Firebase
+export const apppp = initializeApp(firebaseConfig);
+

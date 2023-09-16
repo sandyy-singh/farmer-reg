@@ -18,7 +18,7 @@ import { apppp } from "./firebase";
 
 const firestore = getFirestore(apppp);
 
-const EditForm = () => {
+const EditByEditClick = () => {
   const { accessDataForEdit } =useUserContext();
 
   const [editFarmerName, setEditFarmerName] = useState(
@@ -317,4 +317,4 @@ const EditForm = () => {
   );
 };
 
-export default EditForm;
+export default EditByEditClick;

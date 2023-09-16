@@ -1,9 +1,9 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import "./FarmerOnBoardinng.scss";
-import { useUserContext } from "./UserProvider";
-import axios from "axios";
+// import { useUserContext } from "./UserProvider";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -14,9 +14,27 @@ import { apppp } from "./firebase";
 const auth = getAuth(apppp);
 
 const FarmerOnBoardinng = () => {
+    const navigate = useNavigate();
     const firestore = getFirestore(apppp);
     const [userName, setUuserName] = useState();
-    const { userId } = useUserContext();
+
+    const [farmerName, setFarmerName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [landHolding, setLandHolding] = useState("");
+    const [thisSeason, setThisSeason] = useState("");
+    const [previousSeason, setPreviousSeason] = useState("");
+    const [aadharPanCard, setAadharPanCard] = useState("");
+
+    const [isCropBeforeSowing, setIsCropBeforeSowing] = useState(false);
+    const [isCoverCropping, setIsCoverCropping] = useState(false);
+    const [isIntercropping, setIsIntercropping] = useState(false);
+    const [isBioFertilizers, setIsBioFertilizers] = useState(false);
+    const [isAgroforestry, setIsAgroforestry] = useState(false);
+
+
+    // const { userId } = useUserContext();
+    const userId = localStorage.getItem("uid");
 
     
     useEffect(() => {
@@ -33,28 +51,17 @@ const FarmerOnBoardinng = () => {
         //   console.log(userId)
         }
       });
-      }, [userId]);
+      }, []);
 
-    const [farmerName, setFarmerName] = useState("");
-    const [address, setAddress] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [landHolding, setLandHolding] = useState("");
-    const [thisSeason, setThisSeason] = useState("");
-    const [previousSeason, setPreviousSeason] = useState("");
-    const [aadharPanCard, setAadharPanCard] = useState("");
 
-    const [isCropBeforeSowing, setIsCropBeforeSowing] = useState(false);
-    const [isCoverCropping, setIsCoverCropping] = useState(false);
-    const [isIntercropping, setIsIntercropping] = useState(false);
-    const [isBioFertilizers, setIsBioFertilizers] = useState(false);
-    const [isAgroforestry, setIsAgroforestry] = useState(false);
 
-    const navigate = useNavigate();
+   
  
 
 
 
     const FarmerOnBoardinngSubmit = async (e) => {
+        
         e.preventDefault();
         console.log(userId)
         try {
@@ -68,7 +75,7 @@ const FarmerOnBoardinng = () => {
                     thisSeason,
                     previousSeason,
                     aadharPanCard,
-                    isCropBeforeSowing,
+                    isCropBeforeSowing, 
                     isCoverCropping,
                     isIntercropping,
                     isBioFertilizers,
@@ -105,38 +112,39 @@ const FarmerOnBoardinng = () => {
         setIsBioFertilizers("");
         setIsAgroforestry("");
 
-        const data = {
-            farmerName,
-            address,
-            phoneNumber,
-            landHolding,
-            thisSeason,
-            previousSeason,
-            aadharPanCard,
-            isCropBeforeSowing,
-            isCoverCropping,
-            isIntercropping,
-            isBioFertilizers,
-            isAgroforestry,
-        };
+        // const data = {
+        //     farmerName,
+        //     address,
+        //     phoneNumber,
+        //     landHolding,
+        //     thisSeason,
+        //     previousSeason,
+        //     aadharPanCard,
+        //     isCropBeforeSowing,
+        //     isCoverCropping,
+        //     isIntercropping,
+        //     isBioFertilizers,
+        //     isAgroforestry,
+        // };
 
-        axios
-            .post(
-                "https://dcdataapp-default-rtdb.firebaseio.com/farmerReg.json",
-                data
-            )
-            .then((response) => {
-                console.log(response);
-                console.log();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        // axios
+        //     .post(
+        //         "https://dcdataapp-default-rtdb.firebaseio.com/farmers.json",
+        //         data
+        //     )
+        //     .then((response) => {
+        //         console.log(response);
+        //         console.log();
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+
     };
 
     return (
         <div>
-            <Navbar  name={userName} />
+            {  /*  <Navbar  name={userName} />    */}
             <div className="container-fluid FarmerOnBoardinng  ">
                 <div className=" row  d-flex justify-content-center align-items-center  ">
                     <div className="col-11  FarmerOnBoardinng-box ">
@@ -288,10 +296,11 @@ const FarmerOnBoardinng = () => {
                                         <input
                                             className="form-check-input form-input1"
                                             type="checkbox"
-                                            value={isCoverCropping}
                                             id="flexCheckChecked2"
+                                            value={isCoverCropping}
+                                     
                                             onChange={(e) => setIsCoverCropping(true)}
-                                        />
+                                        /> 
                                         <label
                                             className="form-check-label labels-1"
                                             htmlFor="flexCheckChecked2"

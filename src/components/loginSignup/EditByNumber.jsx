@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useUserContext } from "./UserProvider";
 import {
@@ -15,40 +15,60 @@ const firestore = getFirestore(apppp);
 
 const EditByNumber = () => {
   const [farmerName, setFarmerName] = useState("");
-  const [farmerNumber, setFarmerNumber] = useState("");
-  const { userId, editData, setEditData } = useUserContext();
-  // const navigate = useNavigate();
-
-  const getDataByNumber = async (e) => {
-    const user_Id = userId;
-    e.preventDefault();
-    // console.log(userId);
-    const collectionRef = collection( firestore,`FarmerOnBoardinng/${user_Id}/Farmer_reg`);
-    const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
-
-    const snpshot = await getDocs(q);
-    snpshot.forEach((data) => setEditData(data.data()));
-
-    console.log(editData);
-  };
-
-
-  // const getDataByNumber = async (e) => {
-  //   e.preventDefault();
-  //   const user_Id = userId;
-  //   const collectionRef = collection(firestore, `FarmerOnBoarding/${user_Id}/Farmer_reg`);
-  //   const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
-  //   try{ 
-  //     const snapshot = await getDocs(q);
-  //     snapshot.forEach((doc) => {
-  //       setEditData((doc.data()));
-  //       console.log(editData)
-  //     });
   
-  //   } catch (error) {
-  //     console.error("Error getting data:", error);
-  //   }
-  // };
+  const { farmerNumber, setFarmerNumber,accessDataForEdit, setAccessDataForEdit } = useUserContext();
+  const navigate = useNavigate();
+
+    //   useEffect(() => {
+  //     const listdata = async () => {
+  //         let list =[];
+  //         try{
+  //             const dbVal = await getDocs(collectionRef);
+  //             dbVal.forEach((doc)=>{
+  //              list.push({id:doc.id, ...doc.data()})
+  //             })
+  //            console.log(list)
+  //         }catch(err){
+  //             console.log(err)
+  //         }
+
+  //     };
+  //     listdata();;
+  //   }, []);
+
+  useEffect(() => {
+
+    const getDataByNumber = async (e) => {
+
+      console.log(e);
+    
+      // e.preventDefault();
+      const userId = localStorage.getItem("uid");
+      console.log(userId);
+      const collectionRef = collection( firestore,`FarmerOnBoardinng/${userId}/Farmer_reg`);
+      console.log(collectionRef);
+      const q = query(collectionRef, where("phoneNumber", "==", farmerNumber));
+      console.log(q);
+  
+      const snpshot = await getDocs(q);
+      snpshot.forEach((data) =>{
+        setAccessDataForEdit(data.data())
+   
+      } );
+  
+      console.log(accessDataForEdit);
+    };
+
+    getDataByNumber();
+
+  }, [accessDataForEdit, setAccessDataForEdit,farmerNumber ]);
+
+
+const accessData =()=>{
+  navigate("/EditForm");
+  console.log("check data",accessDataForEdit);
+}
+
   return (
     <div className="main">
       <Navbar />
@@ -59,7 +79,7 @@ const EditByNumber = () => {
             <form
               autoComplete="off"
               className="form-group "
-              onSubmit={getDataByNumber}
+
             >
               <div className="row d-flex justify-content-center align-items-center ">
                 <div className="col-11   mt-4">
@@ -90,7 +110,7 @@ const EditByNumber = () => {
 
                 <div className="row mt-4   ">
                   <div className="col-8 offset-2 mb-2 EnterNumberSubmit  ">
-                    <button type="submit" className="btn-primary ">
+                    <button onClick={accessData} className="btn-primary ">
                       Continue
                     </button>
                   </div>

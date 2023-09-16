@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { apppp } from "./firebase";
-// import { ContactsOutlined } from "@mui/icons-material";
-// import { Phone } from "@mui/icons-material";
+
 
 const auth = getAuth(apppp);
 const firestore = getFirestore(apppp);
@@ -67,7 +66,7 @@ const SignUp = () => {
         location,
         phone
       );
-      await addDoc(collection(firestore, "Users"), {
+      await addDoc(collection(firestore, "UsersData"), {
         name,
         location,
         phone,
@@ -80,7 +79,7 @@ const SignUp = () => {
     } catch (error) {
       if (error) {
         console.log(error);
-        alert("email is already registered");
+        alert("somethimg wrong,please try again");
         setName("");
         setLocation("");
         setState("");
@@ -104,25 +103,6 @@ const SignUp = () => {
     setPassword("");
     navigate("/Login");
 
-    // console.log({name, location, phone, email, password});
-
-    // const signUpData = {
-    //   name,
-    //   location,
-    //   phone,
-    //   email,
-    //   password,
-    // };
-
-    // axios
-    //   .post("https://sheetdb.io/api/v1/jzh5le0t0227h", signUpData)
-    //   .then((response) => {
-    //     console.log(response);
-    //     // console.log(name, location, phone, email, password);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
   return (
