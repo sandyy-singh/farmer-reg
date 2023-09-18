@@ -35,6 +35,24 @@ const FarmerData1 = () => {
   const [id, setId] = useState();
   const [updateForm, setUpdateForm] = useState(false);
 
+  const [isValidMobile, setIsValidMobile] = useState(true);
+  const [isValidAdhar, setIsValidAdhar] = useState(true);
+
+
+  const handleMobileNo = (e) => {
+      const inputMobile = e.target.value;
+      setEditPhoneNumber(inputMobile);
+      const mobilePattern = /^[0-9]{10}$/; 
+      setIsValidMobile(mobilePattern.test(inputMobile));
+    };
+
+    const handleAdharNo = (e) => {
+      const inputAdhar = e.target.value;
+      setEditAadharPanCard(inputAdhar);
+      const adharPattern = /^[0-9]{12}$/;
+      setIsValidAdhar(adharPattern.test(inputAdhar));
+    };
+
   //access all data from fire store
   const collectionRef = collection(
     firestore,
@@ -51,7 +69,7 @@ const FarmerData1 = () => {
       console.log("fromDbVal", fromDbVal);
     };
     listdata();
-  }, []);
+  }, [fromDbVal]);
 
   const HandleEditVal = async (
     id,
@@ -101,6 +119,19 @@ const FarmerData1 = () => {
   };
 
   const editAndSave = async () => {
+    if (!isValidMobile) {
+      alert("Please enter valid 10-digit mobile number");
+      setEditPhoneNumber("");
+
+      return;
+    }
+    if (!isValidAdhar) {
+      alert("Please enter valid AadharNumber ");
+
+      setEditAadharPanCard("");
+
+      return;
+    }
     const updateData = doc(
       firestore,
       `FarmerOnBoardinng/${userId}/Farmer_reg`,
@@ -129,6 +160,7 @@ const FarmerData1 = () => {
       console.log(err);
       alert("something going wrong");
     }
+    window.location.reload();
   };
 
   return (
@@ -229,12 +261,12 @@ const FarmerData1 = () => {
                         phone Number
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control form-inputs"
                         id="phoneNumber"
                         placeholder="Enter your Phone Number"
                         value={editPhoneNumber}
-                        onChange={(e) => setEditPhoneNumber(e.target.value)}
+                        onChange={handleMobileNo}
                         required
                       />
                     </div>
@@ -246,7 +278,7 @@ const FarmerData1 = () => {
                         Total Land Holding(in Acres )
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control form-inputs"
                         id="landHolding"
                         placeholder="Enter your land Holding"
@@ -292,15 +324,15 @@ const FarmerData1 = () => {
                   <div className="row ">
                     <div className="col-10 offset-1">
                       <label className="labels-1" htmlFor="aadharPanCard">
-                        Aadhar/Pan Card Number
+                        Aadhar Card Number
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control form-inputs"
                         id="aadharPanCard"
                         placeholder="Enter your Phone No."
                         value={editAadharPanCard}
-                        onChange={(e) => setEditAadharPanCard(e.target.value)}
+                        onChange={handleAdharNo}
                         required
                       />
                     </div>

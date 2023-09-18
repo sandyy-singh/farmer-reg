@@ -33,8 +33,25 @@ const FarmerOnBoardinng = () => {
     const [isAgroforestry, setIsAgroforestry] = useState(false);
 
 
+    const [isValidMobile, setIsValidMobile] = useState(true);
+    const [isValidAdhar, setIsValidAdhar] = useState(true);
+
     // const { userId } = useUserContext();
     const userId = localStorage.getItem("uid");
+
+    const handleMobileNo = (e) => {
+        const inputMobile = e.target.value;
+        setPhoneNumber(inputMobile);
+        const mobilePattern = /^[0-9]{10}$/; 
+        setIsValidMobile(mobilePattern.test(inputMobile));
+      };
+
+      const handleAdharNo = (e) => {
+        const inputAdhar = e.target.value;
+        setAadharPanCard(inputAdhar);
+        const adharPattern = /^[0-9]{12}$/;
+        setIsValidAdhar(adharPattern.test(inputAdhar));
+      };
 
     
     useEffect(() => {
@@ -64,6 +81,20 @@ const FarmerOnBoardinng = () => {
         
         e.preventDefault();
         console.log(userId)
+
+        if (!isValidMobile) {
+            alert("Please enter valid 10-digit mobile number");
+            setPhoneNumber("");
+      
+            return;
+          }
+          if (!isValidAdhar) {
+            alert("Please enter valid AadharNumber ");
+      
+            setAadharPanCard("");
+      
+            return;
+          }
         try {
             await addDoc(
                 collection(firestore, `FarmerOnBoardinng/${userId}/Farmer_reg`),
@@ -144,7 +175,6 @@ const FarmerOnBoardinng = () => {
 
     return (
         <div className="pt-5 p-sm-5 regist">
-            {  /*  <Navbar  name={userName} />    */}
             <div className="container-fluid pt-5    ">
                 <div className=" row  d-flex justify-content-center align-items-center  ">
                     <div className="col-11 col-sm-8 col-md-7 col-lg-5 border rounded border-secondary p-2 shadow  bg-light ">
@@ -194,12 +224,12 @@ const FarmerOnBoardinng = () => {
                                         phone Number
                                     </label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="form-control form-inputs"
                                         id="phoneNumber"
                                         placeholder="Enter your Phone Number"
                                         value={phoneNumber}
-                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                        onChange={handleMobileNo}
                                         required
                                     />
                                 </div>
@@ -211,7 +241,7 @@ const FarmerOnBoardinng = () => {
                                         Total Land Holdingi(in Acres)
                                     </label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="form-control form-inputs"
                                         id="landHolding"
                                         placeholder="Enter your land Holding"
@@ -257,15 +287,15 @@ const FarmerOnBoardinng = () => {
                             <div className="row d-flex justify-content-center align-items-center">
                                 <div className="col-11">
                                     <label className="labels-1" htmlFor="aadharPanCard">
-                                        Aadhar/Pan Card Number
+                                        Aadhar Card Number
                                     </label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="form-control form-inputs"
                                         id="aadharPanCard"
                                         placeholder="Enter your Phone No."
                                         value={aadharPanCard}
-                                        onChange={(e) => setAadharPanCard(e.target.value)}
+                                        onChange={handleAdharNo}
                                         required
                                     />
                                 </div>
