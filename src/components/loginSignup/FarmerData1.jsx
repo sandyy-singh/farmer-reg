@@ -160,7 +160,9 @@ const FarmerData1 = () => {
       console.log(err);
       alert("something going wrong");
     }
+    navigate("/");
     window.location.reload();
+
   };
 
   return (
