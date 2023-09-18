@@ -178,7 +178,7 @@ const FarmerOnBoardinng = () => {
             <div className="container-fluid pt-5    ">
                 <div className=" row  d-flex justify-content-center align-items-center  ">
                     <div className="col-11 col-sm-8 col-md-7 col-lg-5 border rounded border-secondary p-2 shadow  bg-light ">
-                        <h4 className="text-center text-danger ">Farmers On Boardinng</h4>
+                        <h4 className="text-center  ">Farmers On Boardinng</h4>
                         <form
                             autoComplete="off"
                             className="form-group "
