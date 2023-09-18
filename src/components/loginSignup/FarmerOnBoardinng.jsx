@@ -293,7 +293,7 @@ const FarmerOnBoardinng = () => {
                                         type="number"
                                         className="form-control form-inputs"
                                         id="aadharPanCard"
-                                        placeholder="Enter your Phone No."
+                                        placeholder="Enter your AdharNo Number."
                                         value={aadharPanCard}
                                         onChange={handleAdharNo}
                                         required

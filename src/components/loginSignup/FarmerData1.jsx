@@ -132,7 +132,7 @@ const FarmerData1 = () => {
 
       return;
     }
-    const updateData = doc(
+    const updateData =  doc(
       firestore,
       `FarmerOnBoardinng/${userId}/Farmer_reg`,
       id
@@ -332,7 +332,7 @@ const FarmerData1 = () => {
                         type="number"
                         className="form-control form-inputs"
                         id="aadharPanCard"
-                        placeholder="Enter your Phone No."
+                        placeholder="Enter your Aadhar Number."
                         value={editAadharPanCard}
                         onChange={handleAdharNo}
                         required
