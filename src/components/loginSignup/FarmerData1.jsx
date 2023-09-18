@@ -69,7 +69,7 @@ const FarmerData1 = () => {
       console.log("fromDbVal", fromDbVal);
     };
     listdata();
-  }, [fromDbVal]);
+  }, []);
 
   const HandleEditVal = async (
     id,

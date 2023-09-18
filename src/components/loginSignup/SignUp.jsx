@@ -29,14 +29,14 @@ const SignUp = () => {
   const handleMobileChange = (e) => {
     const inputMobile = e.target.value;
     setPhone(inputMobile);
-
     const mobilePattern = /^[0-9]{10}$/; // Change this pattern according to your needs
     setIsValidMobile(mobilePattern.test(inputMobile));
   };
+
+
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
     setEmail(inputEmail);
-
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     setIsValidEmail(emailPattern.test(inputEmail));
   };
@@ -106,9 +106,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container-fluid register1 ">
-      <div className=" row  d-flex justify-content-center align-items-center  ">
-        <div className="col-11  col-sm-6 col-md-4  signUpBox  ">
+    <div className="container-fluid signUp  ">
+      <div className=" row  d-flex justify-content-center align-items-center py-4 p-sm-5 ">
+        <div className="col-11 col-sm-9 col-md-6 col-lg-4 border rounded border-secondary  shadow  bg-light p-3 p-sm-1 ">
           <h3 className="text-center ">Signup</h3>
           <form
             autoComplete="off"
