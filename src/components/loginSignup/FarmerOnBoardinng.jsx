@@ -203,7 +203,7 @@ const FarmerOnBoardinng = () => {
 
                             <div className="row d-flex justify-content-center align-items-center ">
                                 <div className="col-11">
-                                    <label className="labels-1" htmlFor="address">
+                                    <label className="labels-1" htmlFor="address">   
                                         Address
                                     </label>
                                     <input

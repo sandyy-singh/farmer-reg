@@ -118,7 +118,7 @@ const FarmerData1 = () => {
     setUpdateForm(true);
   };
 
-  const editAndSave = async () => {
+  const editAndSave =  () => {
     if (!isValidMobile) {
       alert("Please enter valid 10-digit mobile number");
       setEditPhoneNumber("");
@@ -138,8 +138,9 @@ const FarmerData1 = () => {
       id
     );
 
+
     try {
-      const snpshot = await updateDoc(updateData, {
+      const snpshot =  updateDoc(updateData, {
         farmerName: editFarmerName,
         address: editAddress,
         phoneNumber: editPhoneNumber,
@@ -217,7 +218,7 @@ const FarmerData1 = () => {
       </div>
 
       {updateForm && (
-        <div className="editForm  p-2 regist">
+        <div className="editForm  pt-5 p-sm-3 regist">
           <div className="container-fluid     ">
             <div className=" row  d-flex justify-content-center align-items-center  ">
               <div className="col-11 col-sm-8 col-md-7 col-lg-5 border rounded border-secondary p-2 shadow  bg-light ">
