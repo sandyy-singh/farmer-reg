@@ -66,7 +66,7 @@ const SignUp = () => {
         location,
         phone
       );
-      await addDoc(collection(firestore, "UsersData"), {
+      await addDoc(collection(firestore, "FarmerOnBoardinngUsersData"), {
         name,
         location,
         phone,
@@ -107,9 +107,9 @@ const SignUp = () => {
 
   return (
     <div className="container-fluid signUp  ">
-      <div className=" row  d-flex justify-content-center align-items-center py-4 p-sm-5 ">
-        <div className="col-11 col-sm-9 col-md-6 col-lg-4 border rounded border-secondary  shadow  bg-light p-3 p-sm-1 ">
-          <h3 className="text-center ">Signup</h3>
+      <div className=" row  d-flex justify-content-center align-items-center py-4 p-sm-5 mt-sm-5 ">
+        <div className="col-11 col-sm-9 col-md-6 col-lg-4 border rounded border-secondary  shadow  bg-light p-3 p-sm-1 mt-sm-4">
+          <h3 className="text-center p-1 p-sm-3">Signup</h3>
           <form
             autoComplete="off"
             className="form-group"
