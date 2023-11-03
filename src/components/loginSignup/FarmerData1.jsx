@@ -118,7 +118,7 @@ const FarmerData1 = () => {
     setUpdateForm(true);
   };
 
-  const editAndSave =  () => {
+  const editAndSave = async () => {
     if (!isValidMobile) {
       alert("Please enter valid 10-digit mobile number");
       setEditPhoneNumber("");
@@ -140,7 +140,7 @@ const FarmerData1 = () => {
 
 
     try {
-      const snpshot =  updateDoc(updateData, {
+      const snpshot = await updateDoc(updateData, {
         farmerName: editFarmerName,
         address: editAddress,
         phoneNumber: editPhoneNumber,
@@ -153,10 +153,12 @@ const FarmerData1 = () => {
         isIntercropping: editIsIntercropping,
         isBioFertilizers: editIsBioFertilizers,
         isAgroforestry: editIsAgroforestry,
+      }).then(()=>{
+        alert("thank for update");
+        console.log(snpshot);
       });
 
-      alert("thank for update");
-      console.log(snpshot);
+     
     } catch (err) {
       console.log(err);
       alert("something going wrong");
